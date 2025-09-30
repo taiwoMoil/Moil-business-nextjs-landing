@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import FAQSection from "~~/src/business/sections/FAQ_section";
 import SelectLanguage from "@/src/common/components/selectLanguage";
 import FooterSection from "@/src/common/sections/footer";
 
@@ -72,6 +73,7 @@ export default function BusinessPage() {
         <div id="testimonials">
           <TestimonialsSection />
         </div>
+        <FAQSection />
         <FinalCTA />
         <FooterSection refQuery={refQuery} lgQuery={queryLg} />
         {showModal}

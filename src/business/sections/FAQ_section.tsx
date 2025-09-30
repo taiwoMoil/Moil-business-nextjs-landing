@@ -62,14 +62,33 @@ export default function FAQSection() {
     }
   }
   return (
-    <div className="flex justify-center flex-col gap-y-4 py-6">
-      <p className="font-[800] text-[20px] md:text-[32px] leading-normal text-center text-[#000000DE]">Frequently Asked Questions</p>
-      <div className="flex w-full px-6 md:px-8 lg:px-12 xl:px-0 self-center flex-col gap-y-4 container xl:max-w-[950px] xtraxl:xl:max-w-[1152px]">
-        {
-          FAQ?.map((faq, i) => {
-            return <FAQItem onClick={() => onClick(faq.question)} key={i} question={faq.question} answer={faq.answer} active={faq.question === active} />
-          })
-        }
+    <div className="relative py-20 bg-gradient-to-br from-slate-50 via-[#5843BE]/5 to-[#FF6633]/5 overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 left-10 w-72 h-72 bg-[#5843BE]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#FF6633]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#5843BE]/8 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-64 h-64 bg-[#FF6633]/8 rounded-full blur-3xl"></div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 flex justify-center flex-col gap-y-12">
+        <div className="text-center space-y-4">
+          <h2 className="font-bold text-3xl md:text-5xl lg:text-6xl text-[#5843BE]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-gray-700 text-lg md:text-xl max-w-2xl mx-auto px-4">
+            Find answers to common questions about Moil and how our platform works
+          </p>
+        </div>
+        
+        <div className="flex w-full px-6 md:px-8 lg:px-12 xl:px-0 self-center flex-col gap-y-6 container xl:max-w-[950px] xtraxl:xl:max-w-[1152px]">
+          {
+            FAQ?.map((faq, i) => {
+              return <FAQItem onClick={() => onClick(faq.question)} key={i} question={faq.question} answer={faq.answer} active={faq.question === active} />
+            })
+          }
+        </div>
       </div>
     </div>
   )
