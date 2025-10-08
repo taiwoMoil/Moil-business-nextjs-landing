@@ -86,15 +86,31 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
         <div className="hidden  text-sm lg:flex space-x-6 items-center">
           <TranslateButton className="bg-transparent flex items-center" textClassName="font-medium text-[#1A1433]" parentClass="" setShowLanguageModal={setShowLanguageModal} />
 
-          <button onClick={() => handleScrollTo('services')} className="px-5 py-3 text-[#1A1433]">
-            Services
-          </button>
-          <button onClick={() => handleScrollTo('features')} className="px-5 py-3 text-[#1A1433]">
-            Features
-          </button>
-          <button onClick={() => handleScrollTo('testimonials')} className="px-5 py-3 text-[#1A1433]">
-            Testimonials
-          </button>
+          {page === "pricing" ? (
+            <>
+              <Link href={`/business${queryString}#services`} className="px-5 py-3 text-[#1A1433]">
+                Services
+              </Link>
+              <Link href={`/business${queryString}#features`} className="px-5 py-3 text-[#1A1433]">
+                Features
+              </Link>
+              <Link href={`/business${queryString}#testimonials`} className="px-5 py-3 text-[#1A1433]">
+                Testimonials
+              </Link>
+            </>
+          ) : (
+            <>
+              <button onClick={() => handleScrollTo('services')} className="px-5 py-3 text-[#1A1433]">
+                Services
+              </button>
+              <button onClick={() => handleScrollTo('features')} className="px-5 py-3 text-[#1A1433]">
+                Features
+              </button>
+              <button onClick={() => handleScrollTo('testimonials')} className="px-5 py-3 text-[#1A1433]">
+                Testimonials
+              </button>
+            </>
+          )}
 
 
           <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" href={`/business/pricing${queryString}`} >
@@ -143,14 +159,27 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
               </button>
             )}
 
-            <button onClick={() => handleScrollTo('features')} className="px-5 py-3 text-[#1A1433]">
-              Features
-            </button>
-            <button onClick={() => handleScrollTo('testimonials')} className="px-5 py-3 text-[#1A1433]">
-              Testimonials
-            </button>
+            {page === "pricing" ? (
+              <>
+                <Link href={`/business${queryString}#features`} className="px-5 py-3 text-[#1A1433]">
+                  Features
+                </Link>
+                <Link href={`/business${queryString}#testimonials`} className="px-5 py-3 text-[#1A1433]">
+                  Testimonials
+                </Link>
+              </>
+            ) : (
+              <>
+                <button onClick={() => handleScrollTo('features')} className="px-5 py-3 text-[#1A1433]">
+                  Features
+                </button>
+                <button onClick={() => handleScrollTo('testimonials')} className="px-5 py-3 text-[#1A1433]">
+                  Testimonials
+                </button>
+              </>
+            )}
 
-            <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" href="/business/pricing" >
+            <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" href={`/business/pricing${queryString}`} >
               Pricing
             </Link>
 
