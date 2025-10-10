@@ -26,17 +26,10 @@ export default function CandidateNavigation({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#5843BE] to-[#4a3ba0] rounded-xl flex items-center justify-center shadow-lg">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
-                <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
-              </svg>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold text-[#5843BE] leading-none">moil</span>
-              <span className="text-xs text-[#FF6633] font-medium leading-none">Find Your Career</span>
-            </div>
-          </Link>
+          <Link href="/candidate" className="text-2xl font-bold text-[#7d4b9e] hidden lg:block">
+          {/* <img src='https://res.cloudinary.com/drlcisipo/image/upload/v1705704266/Website%20images/Moil_Logo_wfxno8.svg' alt="Moil Logo" className="w-16 h-8" /> */}
+          <img src='https://res.cloudinary.com/drlcisipo/image/upload/v1705704261/Website%20images/logo_gox0fw.png' alt="Moil Logo" className="w-16 h-8" />
+        </Link>
           
           {/* Navigation Tabs - Desktop */}
           <nav className="hidden lg:flex items-center space-x-1 bg-gray-100 rounded-full p-1">
