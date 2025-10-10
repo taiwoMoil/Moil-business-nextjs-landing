@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import WorkerNavigation from "~~/src/worker/components/navigation";
+import CandidateNavigation from "~~/src/candidate/components/navigation";
 
 
 export default function PrivacyPage() {
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
   return (
     <>
       <div className="bg-[#F7F8FC]">
-        <WorkerNavigation refQuery="" lgQuery="" setQueryLg={() => { }} setShowLanguageModal={() => { }} />
+        <CandidateNavigation refQuery="" lgQuery="" setQueryLg={() => { }} setShowLanguageModal={() => { }} />
         <div className="py-4 flex justify-center items-center">
           <div className="flex flex-col gap-y-6 md:max-w-[700px] lg:max-w-[750px] px-6 py-6 md:py-10">
             <Link className="w-max flex items-center gap-x-1" href="/">
