@@ -172,75 +172,188 @@ export default function VoiceAssistantSection() {
           </div>
         </div>
 
-        {/* Right Column - Results & CTA */}
-        <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/50 h-full">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-2xl flex items-center justify-center shadow-lg">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
-                <path d="M9 11H15M9 15H15M17 21L12 16L7 21V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+        {/* Bottom Section - Blue Collar Job Coaching CTA */}
+        <div className="mt-16 bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/50">
+          
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF6633]/10 rounded-full border border-[#FF6633]/20 mb-4">
+              <div className="w-2 h-2 bg-[#FF6633] rounded-full animate-pulse"></div>
+              <span className="text-[#FF6633] text-sm font-medium">Ready to Get Hired?</span>
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-gray-900">Success Metrics</h3>
-              <p className="text-gray-600">Proven interview results</p>
-            </div>
+            <h4 className="text-3xl font-bold text-gray-900 mb-3">Land Your Next Blue Collar Job</h4>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Practice interviews for skilled trades and blue collar positions with AI-powered coaching
+            </p>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            <div className="text-center p-4 bg-gradient-to-br from-[#FF6633]/10 to-[#ea580c]/10 rounded-xl border border-[#FF6633]/20">
-              <div className="text-3xl font-bold text-[#FF6633] mb-1">94%</div>
-              <div className="text-sm text-gray-600">Success Rate</div>
-            </div>
-            <div className="text-center p-4 bg-gradient-to-br from-[#FF6633]/10 to-[#ea580c]/10 rounded-xl border border-[#FF6633]/20">
-              <div className="text-3xl font-bold text-[#FF6633] mb-1">4.8★</div>
-              <div className="text-sm text-gray-600">User Rating</div>
-            </div>
-            <div className="text-center p-4 bg-gradient-to-br from-[#FF6633]/10 to-[#ea580c]/10 rounded-xl border border-[#FF6633]/20">
-              <div className="text-3xl font-bold text-[#FF6633] mb-1">25K+</div>
-              <div className="text-sm text-gray-600">Interviews Coached</div>
-            </div>
-            <div className="text-center p-4 bg-gradient-to-br from-[#FF6633]/10 to-[#ea580c]/10 rounded-xl border border-[#FF6633]/20">
-              <div className="text-3xl font-bold text-[#FF6633] mb-1">15min</div>
-              <div className="text-sm text-gray-600">Avg. Session</div>
-            </div>
-          </div>
-
-          {/* Practice Areas */}
-          <div className="mb-8">
-            <h4 className="font-semibold text-gray-900 mb-4">Practice Areas</h4>
-            <div className="space-y-2">
-              {[
-                "Behavioral Questions",
-                "Technical Interviews",
-                "Leadership Scenarios",
-                "Salary Negotiations"
-              ].map((area, index) => (
-                <div key={index} className="flex items-center gap-2 text-sm">
-                  <div className="w-2 h-2 bg-[#FF6633] rounded-full"></div>
-                  <span className="text-gray-700">{area}</span>
+          {/* Stats and Testimonial Section */}
+          <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+            
+            {/* Left - Success Stats & Job Types */}
+            <div className="space-y-6">
+              {/* Success Stats */}
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-xl flex items-center justify-center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                      <path d="M9 12L11 14L15 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-gray-900">Proven Success</h5>
+                    <p className="text-sm text-gray-600">Real workers, real results</p>
+                  </div>
                 </div>
-              ))}
+                
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="text-center p-3 bg-gradient-to-br from-[#FF6633]/10 to-[#ea580c]/10 rounded-xl border border-[#FF6633]/20">
+                    <div className="text-xl font-bold text-[#FF6633] mb-1">89%</div>
+                    <div className="text-xs text-gray-600">Job Success</div>
+                  </div>
+                  <div className="text-center p-3 bg-gradient-to-br from-[#FF6633]/10 to-[#ea580c]/10 rounded-xl border border-[#FF6633]/20">
+                    <div className="text-xl font-bold text-[#FF6633] mb-1">15K+</div>
+                    <div className="text-xs text-gray-600">Workers</div>
+                  </div>
+                  <div className="text-center p-3 bg-gradient-to-br from-[#FF6633]/10 to-[#ea580c]/10 rounded-xl border border-[#FF6633]/20">
+                    <div className="text-xl font-bold text-[#FF6633] mb-1">4.7★</div>
+                    <div className="text-xs text-gray-600">Rating</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Job Types */}
+              <div>
+                <h5 className="font-semibold text-gray-900 mb-3">Industries We Cover</h5>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { 
+                      icon: (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#FF6633]">
+                          <path d="M12 3L13.09 8.26L18 9L13.09 9.74L12 15L10.91 9.74L6 9L10.91 8.26L12 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M19 12L20.09 17.26L25 18L20.09 18.74L19 24L17.91 18.74L13 18L17.91 17.26L19 12Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M5 6L6.09 11.26L11 12L6.09 12.74L5 18L3.91 12.74L-1 12L3.91 11.26L5 6Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      ), 
+                      text: "Construction" 
+                    },
+                    { 
+                      icon: (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#FF6633]">
+                          <path d="M7 17L17 7H13L17 3L21 7V11L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M3 17L7 13V17H11L7 21L3 17Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <rect x="5" y="11" width="14" height="6" rx="2" stroke="currentColor" strokeWidth="2"/>
+                          <circle cx="8" cy="14" r="1" fill="currentColor"/>
+                          <circle cx="12" cy="14" r="1" fill="currentColor"/>
+                          <circle cx="16" cy="14" r="1" fill="currentColor"/>
+                        </svg>
+                      ), 
+                      text: "Transportation" 
+                    },
+                    { 
+                      icon: (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#FF6633]">
+                          <path d="M2 20H22V22H2V20Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                          <path d="M3 20V4H21V20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M7 8H17V16H7V8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M10 8V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                          <path d="M14 8V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="9" cy="12" r="1" fill="currentColor"/>
+                          <circle cx="15" cy="12" r="1" fill="currentColor"/>
+                        </svg>
+                      ), 
+                      text: "Manufacturing" 
+                    },
+                    { 
+                      icon: (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#FF6633]">
+                          <path d="M14.7 6.3L16.1 7.7L12.4 11.4L11 10L14.7 6.3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M8 12L16 4L20 8L12 16L8 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M7 21L3 21L3 17L7 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M5 19L19 5" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+                          <circle cx="18" cy="6" r="2" stroke="currentColor" strokeWidth="2"/>
+                        </svg>
+                      ), 
+                      text: "Maintenance" 
+                    }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                      <div className="flex-shrink-0">{item.icon}</div>
+                      <span className="text-sm text-gray-700 font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right - Testimonial & Benefits */}
+            <div className="space-y-6">
+              {/* Testimonial */}
+              <div className="bg-gradient-to-r from-[#FF6633]/5 to-[#ea580c]/5 rounded-xl p-6 border border-[#FF6633]/20">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex text-[#FF6633] text-lg">
+                    {"★".repeat(5)}
+                  </div>
+                  <span className="text-sm font-semibold text-gray-900">4.7/5</span>
+                </div>
+                <div className="text-base text-gray-700 italic mb-3">
+                  "Got hired as a foreman after practicing with the AI coach. It helped me speak with confidence about my experience and handle tough questions."
+                </div>
+                <div className="text-sm text-gray-500">- Mike R., Construction Foreman</div>
+              </div>
+
+              {/* What You'll Learn */}
+              <div>
+                <h5 className="font-semibold text-gray-900 mb-3">What You'll Master</h5>
+                <div className="space-y-2">
+                  {[
+                    "Answer behavioral questions confidently",
+                    "Highlight your hands-on experience",
+                    "Discuss safety protocols effectively",
+                    "Negotiate salary and benefits"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-[#FF6633] rounded-full flex-shrink-0"></div>
+                      <span className="text-sm text-gray-700">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Testimonial */}
-          <div className="bg-gray-50 rounded-xl p-4 mb-8">
-            <div className="text-sm text-gray-600 italic mb-2">
-              "Landed my dream job after just 3 coaching sessions. The AI feedback was incredibly detailed!"
+          {/* CTA Section */}
+          <div className="bg-gradient-to-r from-gray-50 to-[#FF6633]/5 rounded-2xl p-6 text-center">
+            <div className="max-w-md mx-auto space-y-4">
+              <button className="w-full px-8 py-4 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold rounded-2xl hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                Start Interview Practice Now
+              </button>
+              
+              <div className="grid grid-cols-1 gap-2 text-sm text-gray-600">
+                <div className="flex items-center justify-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-500">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Practice Common Blue Collar Questions</span>
+                </div>
+                <div className="flex items-center justify-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-500">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Build Confidence Speaking About Your Skills</span>
+                </div>
+                <div className="flex items-center justify-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-500">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Get Instant AI Feedback & Coaching</span>
+                </div>
+              </div>
             </div>
-            <div className="text-xs text-gray-500">- Alex K., Product Manager</div>
           </div>
-
-          {/* CTA Button */}
-          <button className="w-full px-6 py-4 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold rounded-2xl hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl mb-3">
-            Start Voice Coaching
-          </button>
-
-          <p className="text-xs text-gray-500 text-center">
-            Free 3-session trial • No commitment required
-          </p>
         </div>
+
       </div>
     </section>
   );

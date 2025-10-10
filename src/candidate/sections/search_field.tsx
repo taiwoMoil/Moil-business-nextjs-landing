@@ -121,82 +121,274 @@ function SearchJobField({ accType = "client" }: SearchJobFieldProps) {
   }, [currentPage, initialSearchDone]);
 
   return (
-    <>
-      <div className="px-6 py-9 flex flex-col gap-6 max-w-[993px] w-full mx-auto">
-        <div className="flex items-center gap-4">
-          <BackButton className="" onClick={() => router.push("/")} />
-          <h1 className="tablet:font-medium text-xl font-normal tablet:text-[28px] text-black text-opacity-60">
-            Filter your job preferences
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-[#FF6633]/20">
+      {/* Grid Overlay */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,102,51,0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,102,51,0.3) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+          animation: 'grid-float 20s ease-in-out infinite'
+        }}
+      />
+
+      {/* Header Section */}
+      <div className="relative z-10 bg-white/80 backdrop-blur-lg border-b border-white/50 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => router.push("/")}
+                className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-xl border border-gray-200 hover:border-[#FF6633]/30 transition-all duration-300 group"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-600 group-hover:text-[#FF6633] transition-colors">
+                  <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="text-gray-700 font-medium">Back</span>
+              </button>
+              
+              <div className="hidden lg:flex items-center justify-end gap-6">
+                <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+                  Find Your Perfect Job
+                </h1>
+                <p className="text-gray-600 mt-1">Discover opportunities that match your skills and aspirations</p>
+              </div>
+            </div>
+
+          </div>
         </div>
-
-        <SearchBarsOnTop
-          JobListData={jobListData}
-          searchJob={searchJob}
-          setSearchJob={setSearchJob}
-          searchLocation={searchLocation}
-          setSearchLocation={setSearchLocation}
-          HandleCancelJobSearch={handleCancelJobSearch}
-          HandleCancelLocationSearch={handleCancelLocationSearch}
-          HandleOverAllSearch={handleOverAllSearch}
-          OurSearchLoading={ourSearchLoading}
-          AcctType={accType}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-
-        <div>
-          <HorizontalNFilterIcon />
-          <p className="mt-[8px] pl-[26px] text-base font-normal text-black text-opacity-60">
-            Filter result
-          </p>
-        </div>
-
-        {ourSearchLoading ? null : (
-          <p className="mt-4 text-xl font-normal tablet:text-[28px] tablet:font-medium text-black text-opacity-60">
-            <span>{jobListData.length} {totalJobs !== 0 ? `out of ${totalJobs}` : null}</span> results found
-          </p>
-        )}
-
-        <p className="flex items-center text-xs font-small tablet:text-[18px] tablet:font-normal text-black text-opacity-60">
-          <img 
-            src='https://res.cloudinary.com/drlcisipo/image/upload/v1705704152/Website%20images/small_logo_mqnwoo.png' 
-            alt="moil logo" 
-            className="w-[30px] h-[20px] mr-2" 
-          />
-          <span>One click apply job</span>
-        </p>
-
-        <div className="grid grid-cols-1 tablet:grid-cols-2 tablet:gap-x-4 ipad:grid-cols-3 gap-y-6">
-          {jobListData.map((item, index) => (
-            <DashboardQueryItem
-              key={item._id || index}
-              experienceLevel=""
-              jobPosition={item.jobTitle}
-              profilePics={item.logo}
-              employer={item.companyName}
-              jobType={item.jobType}
-              recruitmentDuration={item.applicationDeadline}
-              JobLocation={`${item.location.city}, ${item.location.state}`}
-              indeed={item.indeed}
-              jobUrl={`${workerBaseUrl}/jobs/${item.custom_name}?lg=${pageLang}`}
-            />
-          ))}
-        </div>
-
-        {totalPages > 1 && (
-          <PaginationBtn
-            totalPages={totalPages}
-            currentPage={currentPage}
-            onNextPage={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
-            onPrevPage={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
-            onSelectPage={(selectedPage: number) => setCurrentPage(selectedPage)}
-          />
-        )}
-
-        {ourSearchLoading && <LoaderModal text="Getting search result..." />}
       </div>
-    </>
+
+      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        {/* Enhanced Search Section */}
+        <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/50 mb-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-2xl flex items-center justify-center shadow-lg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+                <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-gray-900">Search & Filter Jobs</h2>
+              <p className="text-gray-600">Use advanced filters to find exactly what you're looking for</p>
+            </div>
+          </div>
+
+          {/* Search Bars */}
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
+                  <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" strokeWidth="2"/>
+                  <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Job title, keywords, or company"
+                value={searchJob}
+                onChange={(e) => setSearchJob(e.target.value)}
+                className="w-full pl-12 pr-12 py-4 bg-white rounded-2xl border border-gray-200 focus:border-[#FF6633] focus:ring-2 focus:ring-[#FF6633]/20 outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
+              />
+              {searchJob && (
+                <button
+                  onClick={handleCancelJobSearch}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400 hover:text-gray-600">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              )}
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
+                  <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" strokeWidth="2"/>
+                  <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="City, state, or remote"
+                value={searchLocation}
+                onChange={(e) => setSearchLocation(e.target.value)}
+                className="w-full pl-12 pr-12 py-4 bg-white rounded-2xl border border-gray-200 focus:border-[#FF6633] focus:ring-2 focus:ring-[#FF6633]/20 outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
+              />
+              {searchLocation && (
+                <button
+                  onClick={handleCancelLocationSearch}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400 hover:text-gray-600">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <button
+              onClick={() => handleOverAllSearch(1)}
+              disabled={ourSearchLoading}
+              className="px-8 py-4 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold rounded-2xl hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            >
+              {ourSearchLoading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <span>Searching...</span>
+                </>
+              ) : (
+                <>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                    <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Search Jobs</span>
+                </>
+              )}
+            </button>
+
+            {/* Filter Toggle */}
+            <div className="flex items-center gap-4">
+              <button className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-xl border border-gray-200 hover:border-[#FF6633]/30 transition-all duration-300">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-600">
+                  <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="text-gray-700 font-medium">Filters</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Results Header */}
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-8">
+          <div>
+            {!ourSearchLoading && (
+              <div className="flex items-center gap-4">
+                <h3 className="text-2xl font-bold text-gray-900">
+                  {jobListData.length} {totalJobs !== 0 ? `of ${totalJobs.toLocaleString()}` : ''} Jobs Found
+                </h3>
+                {totalJobs > 0 && (
+                  <div className="flex items-center gap-2 px-3 py-1 bg-green-100 rounded-full">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-green-700 text-sm font-medium">Live Results</span>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {ourError && (
+              <div className="flex items-center gap-2 px-4 py-3 bg-red-50 border border-red-200 rounded-xl mt-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-red-500">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M15 9L9 15M9 9L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="text-red-700">{ourError}</span>
+              </div>
+            )}
+          </div>
+
+          {/* One Click Apply Badge */}
+          <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-lg rounded-xl border border-white/50 shadow-lg">
+            <img 
+              src='https://res.cloudinary.com/drlcisipo/image/upload/v1705704152/Website%20images/small_logo_mqnwoo.png' 
+              alt="moil logo" 
+              className="w-6 h-4" 
+            />
+            <span className="text-gray-700 font-medium text-sm">One-Click Apply</span>
+            <div className="w-2 h-2 bg-[#FF6633] rounded-full animate-pulse"></div>
+          </div>
+        </div>
+
+        {/* Job Results Grid */}
+        {ourSearchLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/50 shadow-lg animate-pulse">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gray-200 rounded-xl"></div>
+                  <div className="flex-1">
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="h-3 bg-gray-200 rounded"></div>
+                  <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {jobListData.map((item, index) => (
+              <DashboardQueryItem
+                key={item._id || index}
+                experienceLevel=""
+                jobPosition={item.jobTitle}
+                profilePics={item.logo}
+                employer={item.companyName}
+                jobType={item.jobType}
+                recruitmentDuration={item.applicationDeadline}
+                JobLocation={`${item.location.city}, ${item.location.state}`}
+                indeed={item.indeed}
+                jobUrl={`${workerBaseUrl}/jobs/${item.custom_name}?lg=${pageLang}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!ourSearchLoading && jobListData.length === 0 && !ourError && (
+          <div className="text-center py-16">
+            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+                <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No jobs found</h3>
+            <p className="text-gray-600 mb-6">Try adjusting your search criteria or explore different keywords</p>
+            <button
+              onClick={() => {
+                setSearchJob("");
+                setSearchLocation("");
+                handleOverAllSearch(1);
+              }}
+              className="px-6 py-3 bg-[#FF6633] text-white font-medium rounded-xl hover:bg-[#ea580c] transition-colors"
+            >
+              Clear Filters
+            </button>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && !ourSearchLoading && (
+          <div className="mt-12 flex justify-center">
+            <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-2 border border-white/50 shadow-lg">
+              <PaginationBtn
+                totalPages={totalPages}
+                currentPage={currentPage}
+                onNextPage={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
+                onPrevPage={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
+                onSelectPage={(selectedPage: number) => setCurrentPage(selectedPage)}
+              />
+            </div>
+          </div>
+        )}
+
+        {ourSearchLoading && <LoaderModal text="Finding the perfect jobs for you..." />}
+      </div>
+    </div>
   );
 }
 
