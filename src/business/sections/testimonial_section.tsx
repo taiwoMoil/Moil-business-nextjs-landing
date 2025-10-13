@@ -92,9 +92,9 @@ export default function BusinessTestimonialSection() {
 
 
   return (
-    <div className="bg-[#5843BD] px-6 sm:px-8 md:px-12 lg:px-0 py-16 flex justify-center flex-col items-center gap-y-8 ">
+    <div className="bg-[#5843BD] px-4 sm:px-6 md:px-8 lg:px-0 py-8 md:py-12 lg:py-16 flex justify-center flex-col items-center gap-y-4 md:gap-y-6 lg:gap-y-8">
 
-      <p className="text-white text-[24px] md:text-[30px] lg:text-[36px] leading-[1.3] text-center font-medium">What our users are saying</p>
+      <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-[1.3] text-center font-medium px-4">What our users are saying</p>
 
       <Carousel
         swipeable={true}

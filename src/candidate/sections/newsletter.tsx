@@ -44,11 +44,11 @@ export default function NewsletterSection() {
             <span className="text-white font-semibold">Stay Updated</span>
           </div>
           
-          <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+          <h2 className="text-3xl lg:text-5xl font-bold text-white leading-tight mb-6">
             Get Exclusive Job Opportunities & <br />
             <span className="text-[#FF6633]">AI-Powered Career Insights</span>
           </h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-12">
+          <p className="text-lg lg:text-xl text-white/80 max-w-2xl mx-auto mb-12">
             Join thousands of professionals receiving personalized job alerts, interview tips, and career guidance delivered straight to your inbox.
           </p>
         </div>

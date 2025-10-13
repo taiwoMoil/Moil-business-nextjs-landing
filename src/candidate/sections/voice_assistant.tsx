@@ -9,7 +9,7 @@ interface VoiceAssistantSectionProps {
 
 export default function VoiceAssistantSection({ refQuery, lgQuery }: VoiceAssistantSectionProps) {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-white via-orange-50 to-[#FF6633]/20">
+    <section className="relative py-8 md:py-16 lg:py-24 xl:py-32 overflow-hidden bg-gradient-to-br from-white via-orange-50 to-[#FF6633]/20" id="voice-assistant">
       {/* Grid Overlay */}
       <div
         className="absolute inset-0 opacity-10"
@@ -25,26 +25,26 @@ export default function VoiceAssistantSection({ refQuery, lgQuery }: VoiceAssist
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 backdrop-blur-lg rounded-full border border-[#FF6633]/20 shadow-lg mb-6">
-            <div className="w-3 h-3 bg-[#FF6633] rounded-full animate-pulse"></div>
-            <span className="text-[#FF6633] font-semibold">AI Voice Interview Coach</span>
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white/80 backdrop-blur-lg rounded-full border border-[#FF6633]/20 shadow-lg mb-4 md:mb-6">
+            <div className="w-2 h-2 md:w-3 md:h-3 bg-[#FF6633] rounded-full animate-pulse"></div>
+            <span className="text-[#FF6633] font-medium md:font-semibold text-sm md:text-base">AI Voice Interview Coach</span>
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            Master Interviews with <br />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-4 md:mb-6">
+            Master Interviews with <br className="hidden sm:block" />
             <span className="text-[#FF6633] bg-gradient-to-r from-[#FF6633] to-[#ea580c] bg-clip-text text-transparent">Voice AI Coaching</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
             Transform your interview performance with real-time AI analysis of your speech patterns,
             confidence levels, and answer quality. Get personalized feedback to land your dream job.
           </p>
         </div>
 
         {/* Main Content - Linear Design */}
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-start">
 
           {/* Left Column - Analysis Features */}
-          <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/50 h-full">
+          <div className="bg-white/80 backdrop-blur-lg rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 shadow-2xl border border-white/50 h-full">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-14 h-14 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-2xl flex items-center justify-center shadow-lg">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
@@ -188,8 +188,8 @@ export default function VoiceAssistantSection({ refQuery, lgQuery }: VoiceAssist
               <div className="w-2 h-2 bg-[#FF6633] rounded-full animate-pulse"></div>
               <span className="text-[#FF6633] text-sm font-medium">Ready to Get Hired?</span>
             </div>
-            <h4 className="text-3xl font-bold text-gray-900 mb-3">Land Your Next Blue Collar Job</h4>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Land Your Next Blue Collar Job</h4>
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
               Practice interviews for skilled trades and blue collar positions with AI-powered coaching
             </p>
           </div>

@@ -129,7 +129,7 @@ export default function MarketResearch() {
   };
 
   return (
-    <section className="relative py-32 overflow-hidden" id="research">
+    <section className="relative py-8 md:py-16 lg:py-24 xl:py-32 overflow-hidden" id="research">
       {/* Sophisticated White to Purple Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-[#5843BD]/20"></div>
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#5843BD]/5 to-[#5843BD]/10"></div>
@@ -171,30 +171,30 @@ export default function MarketResearch() {
 
       <div className="container relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-6 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium mb-6 text-gray-700 shadow-sm">
-            <div className="w-2 h-2 bg-[#5843BD] rounded-full"></div>
+        <div className="text-center mb-8 md:mb-12 lg:mb-16 xl:mb-20 px-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 bg-white border border-gray-200 rounded-full text-xs md:text-sm font-medium mb-4 md:mb-6 text-gray-700 shadow-sm">
+            <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#5843BD] rounded-full"></div>
             AI-Powered Research
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 text-gray-900 leading-tight">
             Complete Business Plan{" "}
             <span className="text-[#5843BD]">in Minutes</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Skip expensive consultants and months of research. Our AI generates comprehensive 
             business plans that helped 200+ businesses secure funding and make informed decisions.
           </p>
         </div>
 
         {/* Research Highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12 lg:mb-16 xl:mb-20 px-4">
           {researchHighlights.map((highlight, index) => (
-            <div key={index} className="group bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-[#5843BD] rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-[#FF6633] transition-colors duration-300">
+            <div key={index} className="group bg-white rounded-lg md:rounded-xl p-4 md:p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-[#5843BD] rounded-lg flex items-center justify-center text-white mb-3 md:mb-4 group-hover:bg-[#FF6633] transition-colors duration-300">
                 {highlight.icon}
               </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">{highlight.title}</h4>
-              <p className="text-gray-600 text-sm leading-relaxed">{highlight.description}</p>
+              <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-2">{highlight.title}</h4>
+              <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{highlight.description}</p>
             </div>
           ))}
         </div>

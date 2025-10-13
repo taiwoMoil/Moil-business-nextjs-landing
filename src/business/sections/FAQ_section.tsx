@@ -62,7 +62,7 @@ export default function FAQSection() {
     }
   }
   return (
-    <div className="relative py-20 bg-gradient-to-br from-slate-50 via-[#5843BE]/5 to-[#FF6633]/5 overflow-hidden">
+    <div className="relative py-8 md:py-12 lg:py-20 bg-gradient-to-br from-slate-50 via-[#5843BE]/5 to-[#FF6633]/5 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-72 h-72 bg-[#5843BE]/10 rounded-full blur-3xl"></div>
@@ -72,17 +72,17 @@ export default function FAQSection() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 flex justify-center flex-col gap-y-12">
-        <div className="text-center space-y-4">
-          <h2 className="font-bold text-3xl md:text-5xl lg:text-6xl text-[#5843BE]">
+      <div className="relative z-10 flex justify-center flex-col gap-y-6 md:gap-y-8 lg:gap-y-12">
+        <div className="text-center space-y-3 md:space-y-4">
+          <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#5843BE] px-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-700 text-lg md:text-xl max-w-2xl mx-auto px-4">
+          <p className="text-gray-700 text-sm md:text-base lg:text-lg xl:text-xl max-w-2xl mx-auto px-4">
             Find answers to common questions about Moil and how our platform works
           </p>
         </div>
         
-        <div className="flex w-full px-6 md:px-8 lg:px-12 xl:px-0 self-center flex-col gap-y-6 container xl:max-w-[950px] xtraxl:xl:max-w-[1152px]">
+        <div className="flex w-full px-4 md:px-6 lg:px-8 xl:px-0 self-center flex-col gap-y-3 md:gap-y-4 lg:gap-y-6 container xl:max-w-[950px] xtraxl:xl:max-w-[1152px]">
           {
             FAQ?.map((faq, i) => {
               return <FAQItem onClick={() => onClick(faq.question)} key={i} question={faq.question} answer={faq.answer} active={faq.question === active} />

@@ -40,14 +40,14 @@ export default function FinalCTA({ refQuery, lgQuery }: FinalCTAProps) {
             Ready to Transform Your Business?
           </div>
           
-          <h2 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-8 leading-tight">
             <span className="bg-gradient-to-r from-[#5843BD] via-purple-600 to-[#5843BD] bg-clip-text text-transparent">Join the </span>
             <span className="bg-gradient-to-r from-[#FF6633] via-orange-500 to-[#FF6633] bg-clip-text text-transparent">AI Revolution</span>
-            <br />
+            <br className="hidden md:block" />
             <span className="text-gray-900">Today</span>
           </h2>
           
-          <p className="text-xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-md md:text-xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed">
             Don't let your competitors get ahead. Start your AI-powered business transformation 
             with Moil's comprehensive growth platform and join 500+ successful businesses.
           </p>
@@ -122,7 +122,7 @@ export default function FinalCTA({ refQuery, lgQuery }: FinalCTAProps) {
             {/* Animated Border */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#5843BD]/20 via-[#FF6633]/20 to-[#5843BD]/20 opacity-50 animate-pulse rounded-3xl"></div>
             
-            <div className="relative z-10 p-12 text-center">
+            <div className="relative z-10 lg:p-12 p-8 text-center">
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
                 <button 

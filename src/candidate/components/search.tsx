@@ -124,7 +124,7 @@ export default function SearchComponent({ lgQuery }: any) {
                 /> */}
 
             <Autocomplete
-              apiKey={process.env.GOOGLE_API_KEY_1}
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY_1}
               style={{ width: "90%" }}
               className="py-2 rounded-lg border-opacity-30 bg-white px-3 w-full border-none outline-none focus:ring-transparent focus:border-transparent focus:ring-[#5843BE] focus:ring-opacity-20"
               onPlaceSelected={(place) => {

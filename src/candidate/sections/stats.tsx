@@ -37,11 +37,11 @@ export default function StatsSection({ refQuery, lgQuery }: StatsSectionProps) {
             <div className="w-3 h-3 bg-[#FF6633] rounded-full animate-pulse"></div>
             <span className="text-[#FF6633] font-semibold">Platform Statistics</span>
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+          <h2 className="text-3xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
             Proven Results That <br />
             <span className="text-[#FF6633] bg-gradient-to-r from-[#FF6633] to-[#ea580c] bg-clip-text text-transparent">Speak for Themselves</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
             Join thousands of professionals who have transformed their careers with our AI-powered platform and advanced coaching tools
           </p>
         </div>
@@ -105,7 +105,7 @@ export default function StatsSection({ refQuery, lgQuery }: StatsSectionProps) {
                   <div className="w-16 h-16 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                     {stat.icon}
                   </div>
-                  <div className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                  <div className="text-3xl lg:text-5xl font-bold text-gray-900 mb-2">{stat.number}</div>
                   <div className="text-lg font-semibold text-gray-900 mb-2">{stat.title}</div>
                   <div className="text-sm text-gray-600">
                     {stat.desc}

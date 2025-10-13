@@ -9,7 +9,7 @@ interface BilingualSectionProps {
 
 export default function BilingualSection({ refQuery, lgQuery }: BilingualSectionProps) {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-white via-purple-50 to-[#5843BE]/20">
+    <section className="relative py-8 md:py-16 lg:py-24 xl:py-32 overflow-hidden bg-gradient-to-br from-white via-purple-50 to-[#5843BE]/20" id="bilingual">
       {/* Grid Overlay */}
       <div 
         className="absolute inset-0 opacity-10"
@@ -25,26 +25,26 @@ export default function BilingualSection({ refQuery, lgQuery }: BilingualSection
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header Section */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 backdrop-blur-lg rounded-full border border-[#5843BE]/20 shadow-lg mb-6">
-              <div className="w-3 h-3 bg-[#5843BE] rounded-full animate-pulse"></div>
-              <span className="text-[#5843BE] font-semibold">Bilingual Voice Platform</span>
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white/80 backdrop-blur-lg rounded-full border border-[#5843BE]/20 shadow-lg mb-4 md:mb-6">
+              <div className="w-2 h-2 md:w-3 md:h-3 bg-[#5843BE] rounded-full animate-pulse"></div>
+              <span className="text-[#5843BE] font-medium md:font-semibold text-sm md:text-base">Bilingual Voice Platform</span>
             </div>
-            <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Speak Your Language, <br />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-4 md:mb-6">
+              Speak Your Language, <br className="hidden sm:block" />
               <span className="text-[#5843BE] bg-gradient-to-r from-[#5843BE] to-[#4a3ba0] bg-clip-text text-transparent">Find Your Job</span>
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
               Navigate the entire platform using voice commands in English or Spanish. 
               Switch languages seamlessly and get personalized job recommendations in your preferred language.
             </p>
           </div>
 
           {/* Main Content - Linear Design */}
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-start">
 
             {/* Left Column - Voice Control Features */}
-            <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/50 h-full">
+            <div className="bg-white/80 backdrop-blur-lg rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 shadow-2xl border border-white/50 h-full">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 bg-gradient-to-br from-[#5843BE] to-[#4a3ba0] rounded-2xl flex items-center justify-center shadow-lg">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
@@ -183,8 +183,8 @@ export default function BilingualSection({ refQuery, lgQuery }: BilingualSection
                 <div className="w-2 h-2 bg-[#5843BE] rounded-full animate-pulse"></div>
                 <span className="text-[#5843BE] text-sm font-medium">Try Voice Commands</span>
               </div>
-              <h4 className="text-3xl font-bold text-gray-900 mb-3">Experience Bilingual Voice Control</h4>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+              <h4 className="text-2xl font-bold text-gray-900 mb-3">Experience Bilingual Voice Control</h4>
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
                 Start using voice commands in English or Spanish to navigate jobs, practice interviews, and apply to positions.
               </p>
               

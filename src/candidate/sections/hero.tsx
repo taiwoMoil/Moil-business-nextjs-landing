@@ -50,13 +50,13 @@ export default function CandidateHero({ onGetStarted, refQuery, lgQuery }: Candi
 
   // Floating job categories component
   const FloatingJob = ({ text, className }: { text: string; className: string }) => (
-    <div className={`absolute px-4 py-2 bg-white/10 rounded-full text-sm text-white/60 backdrop-blur-sm border border-white/15 animate-pulse ${className}`}>
+    <div className={`absolute px-3 py-1.5 md:px-4 md:py-2 bg-white/10 rounded-full text-xs md:text-sm text-white/60 backdrop-blur-sm border border-white/15 animate-pulse ${className}`}>
       {text}
     </div>
   );
 
   return (
-    <div className="bg-cover bg-center bg-no-repeat min-h-screen relative overflow-hidden flex justify-center items-center pt-24 pb-16 lg:pt-32 lg:pb-24"
+    <div className="bg-cover bg-center bg-no-repeat min-h-screen relative overflow-hidden flex justify-center items-center pt-16 pb-8 md:pt-20 lg:pt-32 md:pb-12 lg:pb-24"
          style={{ backgroundImage: `url('/BackgroundWorkerDesktop.png')` }}>
       
       {/* Grid Overlay */}
@@ -80,25 +80,26 @@ export default function CandidateHero({ onGetStarted, refQuery, lgQuery }: Candi
       <FloatingJob text='Warehouse Worker' className='top-[50%] left-[5%] hidden xl:block' />
       <FloatingJob text='Machine Operator' className='top-[45%] right-[8%] hidden xl:block' />
 
-      <div className="flex w-full flex-col items-center gap-y-6 lg:gap-y-8 justify-center max-w-[85vw] relative z-10">
+      <div className="flex w-full flex-col items-center gap-y-4 md:gap-y-6 lg:gap-y-8 justify-center max-w-[90vw] md:max-w-[85vw] relative z-10 px-4">
         
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/15 rounded-full border border-white/20 backdrop-blur-sm text-sm font-medium text-white/90">
+        <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white/15 rounded-full border border-white/20 backdrop-blur-sm text-xs md:text-sm font-medium text-white/90">
           <div className="text-[#FF6633]">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="14" height="14" className="md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
             </svg>
           </div>
-          <span>Join 50,000+ Job Seekers Finding Success</span>
+          <span className="hidden sm:inline">Join 50,000+ Job Seekers Finding Success</span>
+          <span className="sm:hidden">50,000+ Success Stories</span>
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-[20px] lg:text-4xl font-semibold leading-[1.2] text-center text-white">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.2] text-center text-white">
           Your AI Career Assistant
         </h1>
         
         {/* Subtitle */}
-        <p className="text-base font-semibold leading-[19.2px] text-center text-white max-w-2xl mx-auto">
+        <p className="text-sm md:text-base font-medium md:font-semibold leading-relaxed text-center text-white max-w-2xl mx-auto">
           Beyond job matching - master interviews with voice coaching, build resumes in 5 minutes, and find your perfect career path with AI guidance
         </p>
 
@@ -106,49 +107,49 @@ export default function CandidateHero({ onGetStarted, refQuery, lgQuery }: Candi
         <SearchComponent lgQuery={lgQuery || "en"} />
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto">
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center max-w-lg mx-auto">
           <button
             onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
-            className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold text-sm rounded-full hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className="w-full sm:w-auto px-6 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-medium md:font-semibold text-xs md:text-sm rounded-full hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
           >
             CREATE PERSONAL PROFILE
           </button>
           <button 
             onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
-            className="w-full sm:w-auto px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold text-sm rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105"
+            className="w-full sm:w-auto px-6 py-2.5 md:px-8 md:py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-medium md:font-semibold text-xs md:text-sm rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105"
           >
             LOGIN TO YOUR PROFILE
           </button>
         </div>
 
         {/* AI Features - Compact Design */}
-        <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
-          <div className="group flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4 max-w-3xl mx-auto">
+          <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
+            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
+              <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 10.5V19L13.5 17.5V10.5M10.5 10.5V17.5L9 19V10.5M9 9V7.5L3 7V9H9Z" fill="currentColor"/>
               </svg>
             </div>
-            <span className="text-white text-sm font-medium">Voice Interview Coach</span>
+            <span className="text-white text-xs md:text-sm font-medium">Voice Interview Coach</span>
           </div>
           
-          <div className="group flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+          <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
+            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
+              <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9,2A7,7 0 0,1 16,9C16,10.57 15.5,12 14.61,13.19L15.41,14H16L22,20L20,22L14,16V15.41L13.19,14.61C12,15.5 10.57,16 9,16A7,7 0 0,1 2,9A7,7 0 0,1 9,2M9,4A5,5 0 0,0 4,9A5,5 0 0,0 9,14A5,5 0 0,0 14,9A5,5 0 0,0 9,4Z" fill="currentColor"/>
                 <circle cx="9" cy="9" r="2" fill="currentColor"/>
               </svg>
             </div>
-            <span className="text-white text-sm font-medium">Smart Job Matching</span>
+            <span className="text-white text-xs md:text-sm font-medium">Smart Job Matching</span>
           </div>
           
-          <div className="group flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+          <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
+            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
+              <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z" fill="currentColor"/>
               </svg>
             </div>
-            <span className="text-white text-sm font-medium">Voice & Bilingual</span>
+            <span className="text-white text-xs md:text-sm font-medium">Voice & Bilingual</span>
           </div>
         </div>
       </div>
