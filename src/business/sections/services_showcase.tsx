@@ -172,6 +172,10 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
   const [isLoading, setIsLoading] = useState(false);
   const [demoResults, setDemoResults] = useState<any>(null);
   const [formData, setFormData] = useState<any>({});
+  const [financialProjections, setFinancialProjections] = useState<any>(null);
+  const [audienceAnalysis, setAudienceAnalysis] = useState<any>(null);
+  const [isGeneratingFinancials, setIsGeneratingFinancials] = useState(false);
+  const [isGeneratingAudience, setIsGeneratingAudience] = useState(false);
 
   const generateMarketInsights = (business: string, location: string, market: string): MarketInsights => {
     const locationData: Record<string, any> = {
@@ -332,6 +336,84 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
   const handleViewFullResults = () => {
     // Redirect to business register with referral tracking
     openBusinessRegister({ ref: refQuery, lg: lgQuery });
+  };
+
+  // Financial Projections API
+  const handleFinancialProjections = async (data: any) => {
+    // Validation
+    if (!data.finBusinessName || !data.finIndustry || !data.finBudget || !data.finTargetRevenue) {
+      alert('Please fill in all required fields for financial projections.');
+      return;
+    }
+
+    setIsGeneratingFinancials(true);
+    setFinancialProjections(null);
+    
+    try {
+      const response = await fetch('/api/demo/financial-projections', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          businessName: data.finBusinessName,
+          industry: data.finIndustry,
+          location: location || 'Austin, TX',
+          budget: data.finBudget,
+          targetRevenue: data.finTargetRevenue
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        setFinancialProjections(result);
+      } else {
+        console.error('Financial projections failed:', result.error);
+        alert('Failed to generate financial projections. Please try again.');
+      }
+    } catch (error) {
+      console.error('API Error:', error);
+      alert('Network error. Please check your connection and try again.');
+    } finally {
+      setIsGeneratingFinancials(false);
+    }
+  };
+
+  // Audience Analysis API
+  const handleAudienceAnalysis = async (data: any) => {
+    // Validation
+    if (!data.audBusinessType || !data.audLocation || !data.audIndustry) {
+      alert('Please fill in all required fields for audience analysis.');
+      return;
+    }
+
+    setIsGeneratingAudience(true);
+    setAudienceAnalysis(null);
+    
+    try {
+      const response = await fetch('/api/demo/audience-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          businessType: data.audBusinessType,
+          location: data.audLocation,
+          industry: data.audIndustry
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        setAudienceAnalysis(result);
+      } else {
+        console.error('Audience analysis failed:', result.error);
+        alert('Failed to generate audience analysis. Please try again.');
+      }
+    } catch (error) {
+      console.error('API Error:', error);
+      alert('Network error. Please check your connection and try again.');
+    } finally {
+      setIsGeneratingAudience(false);
+    }
   };
 
   return (
@@ -660,53 +742,99 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                         <div className="space-y-6">
                           <div className="grid gap-4">
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">Initial Investment ($)</label>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Business Name</label>
                               <input
-                                type="number"
-                                placeholder="50000"
+                                type="text"
+                                value={formData.finBusinessName || ''}
+                                onChange={(e) => setFormData({...formData, finBusinessName: e.target.value})}
+                                placeholder="e.g., Austin Coffee Co."
                                 className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">Monthly Operating Costs ($)</label>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Industry</label>
+                              <select
+                                value={formData.finIndustry || ''}
+                                onChange={(e) => setFormData({...formData, finIndustry: e.target.value})}
+                                className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
+                              >
+                                <option value="">Select Industry</option>
+                                <option value="Restaurant">Restaurant</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Consulting">Consulting</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Initial Budget ($)</label>
                               <input
-                                type="number"
-                                placeholder="8000"
+                                type="text"
+                                value={formData.finBudget || ''}
+                                onChange={(e) => setFormData({...formData, finBudget: e.target.value})}
+                                placeholder="e.g., $50K"
                                 className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">Expected Monthly Revenue ($)</label>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Target Revenue ($)</label>
                               <input
-                                type="number"
-                                placeholder="15000"
+                                type="text"
+                                value={formData.finTargetRevenue || ''}
+                                onChange={(e) => setFormData({...formData, finTargetRevenue: e.target.value})}
+                                placeholder="e.g., $200K"
                                 className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
                               />
                             </div>
                           </div>
                           <button
-                            className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300"
+                            className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300 disabled:opacity-50"
                             style={{backgroundColor: section.color}}
-                            onClick={() => openBusinessRegister({ ref: refQuery, lg: lgQuery })}
+                            onClick={() => handleFinancialProjections(formData)}
+                            disabled={isGeneratingFinancials}
                           >
-                            Calculate Projections
+                            {isGeneratingFinancials ? 'Generating Projections...' : 'Generate AI Financial Projections'}
                           </button>
-                          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                            <div className="text-sm text-gray-700 space-y-2">
-                              <div className="flex justify-between">
-                                <span className="font-semibold">Year 1 Revenue:</span>
-                                <span className="font-bold" style={{color: section.color}}>$180K</span>
+                          {financialProjections && financialProjections.data && (
+                            <div className="mt-6 p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+                              <div className="flex items-center justify-between mb-4">
+                                <h4 className="text-lg font-bold text-gray-800">AI Financial Projections</h4>
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Demo Preview</span>
                               </div>
-                              <div className="flex justify-between">
-                                <span className="font-semibold">Break-even:</span>
-                                <span className="text-green-600 font-bold">Month 9</span>
+                              <div className="text-sm text-gray-700 space-y-2 mb-4">
+                                <div className="flex justify-between">
+                                  <span className="font-semibold">Year 1 Revenue:</span>
+                                  <span className="font-bold" style={{color: section.color}}>${financialProjections.data.year1Revenue}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="font-semibold">Break-even:</span>
+                                  <span className="text-green-600 font-bold">Month {financialProjections.data.breakEvenMonth}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="font-semibold">ROI Year 1:</span>
+                                  <span className="font-bold" style={{color: section.color}}>{financialProjections.data.roiYear1}%</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="font-semibold">Monthly Growth:</span>
+                                  <span className="font-bold text-blue-600">{financialProjections.data.monthlyGrowth}%</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="font-semibold">Initial Costs:</span>
+                                  <span className="font-bold text-red-600">${financialProjections.data.initialCosts}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="font-semibold">Profit Margin:</span>
+                                  <span className="font-bold text-green-600">{financialProjections.data.profitMargin}%</span>
+                                </div>
                               </div>
-                              <div className="flex justify-between">
-                                <span className="font-semibold">ROI Year 1:</span>
-                                <span className="font-bold" style={{color: section.color}}>24%</span>
-                              </div>
+                              <button
+                                onClick={handleViewFullResults}
+                                className="w-full bg-gradient-to-r from-[#FF6633] to-[#5843BD] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                              >
+                                Get Complete Financial Plan & Business Tools
+                              </button>
                             </div>
-                          </div>
+                          )}
                         </div>
                       )}
 
@@ -867,55 +995,68 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                         <div className="space-y-6">
                           <div className="grid gap-4">
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">Target Audience</label>
-                              <select
-                                value={targetMarket}
-                                onChange={(e) => setTargetMarket(e.target.value)}
-                                className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
-                              >
-                                <option value="young-professionals">Young Professionals</option>
-                                <option value="families">Families</option>
-                                <option value="seniors">Seniors</option>
-                                <option value="students">Students</option>
-                              </select>
-                            </div>
-                            <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">Marketing Budget ($)</label>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Business Type</label>
                               <input
-                                type="number"
-                                placeholder="5000"
+                                type="text"
+                                value={formData.audBusinessType || ''}
+                                onChange={(e) => setFormData({...formData, audBusinessType: e.target.value})}
+                                placeholder="e.g., Restaurant, Retail Store, Consulting"
                                 className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">Preferred Channels (select multiple)</label>
-                              <div className="space-y-2">
-                                {["Social Media", "Google Ads", "Local Events", "Email Marketing", "Referrals"].map((channel) => (
-                                  <label key={channel} className="flex items-center">
-                                    <input type="checkbox" className="mr-2" />
-                                    <span className="text-sm">{channel}</span>
-                                  </label>
-                                ))}
-                              </div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Location</label>
+                              <input
+                                type="text"
+                                value={formData.audLocation || ''}
+                                onChange={(e) => setFormData({...formData, audLocation: e.target.value})}
+                                placeholder="e.g., Austin, TX"
+                                className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Industry</label>
+                              <select
+                                value={formData.audIndustry || ''}
+                                onChange={(e) => setFormData({...formData, audIndustry: e.target.value})}
+                                className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
+                              >
+                                <option value="">Select Industry</option>
+                                <option value="Food & Beverage">Food & Beverage</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Professional Services">Professional Services</option>
+                                <option value="Beauty & Wellness">Beauty & Wellness</option>
+                                <option value="Automotive">Automotive</option>
+                              </select>
                             </div>
                           </div>
                           <button
-                            className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300"
+                            className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300 disabled:opacity-50"
                             style={{backgroundColor: section.color}}
-                            onClick={() => openBusinessRegister({ ref: refQuery, lg: lgQuery })}
+                            onClick={() => handleAudienceAnalysis(formData)}
+                            disabled={isGeneratingAudience}
                           >
-                            Generate Strategy
+                            {isGeneratingAudience ? 'Analyzing Audience...' : 'Generate AI Audience Analysis'}
                           </button>
-                          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                            <div className="text-sm text-gray-700 space-y-2">
-                              <div className="font-semibold mb-2">Recommended Strategy:</div>
-                              <div>• Social Media (40% budget)</div>
-                              <div>• Google Ads (30% budget)</div>
-                              <div>• Local Events (20% budget)</div>
-                              <div>• Referrals (10% budget)</div>
-                              <div className="font-semibold mt-2" style={{color: section.color}}>Expected: 150 new customers/month</div>
+                          {audienceAnalysis && audienceAnalysis.data && (
+                            <div className="mt-6 p-6 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg border border-green-200">
+                              <div className="flex items-center justify-between mb-4">
+                                <h4 className="text-lg font-bold text-gray-800">AI Audience Analysis</h4>
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Demo Preview</span>
+                              </div>
+                              <div className="text-sm text-gray-700 whitespace-pre-line mb-4">
+                                {audienceAnalysis.data.substring(0, 400)}...
+                              </div>
+                              <button
+                                onClick={handleViewFullResults}
+                                className="w-full bg-gradient-to-r from-[#FF6633] to-[#5843BD] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                              >
+                                Get Complete Audience Strategy & Marketing Tools
+                              </button>
                             </div>
-                          </div>
+                          )}
                         </div>
                       )}
 
