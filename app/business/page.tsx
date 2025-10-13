@@ -62,19 +62,19 @@ export default function BusinessPage() {
           setQueryLg={setQueryLg}
           setShowLanguageModal={setShowLanguageModal}
         />
-        <EnhancedHero onGetStarted={handleGetStarted} />
+        <EnhancedHero onGetStarted={handleGetStarted} refQuery={refQuery || undefined} lgQuery={queryLg} />
         <div id="services">
-          <ServicesShowcase />
+          <ServicesShowcase refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
         <div id="features">
           <MarketResearch />
         </div>
-        <SmartHiring />
+        <SmartHiring refQuery={refQuery || undefined} lgQuery={queryLg} />
         <div id="testimonials">
           <TestimonialsSection />
         </div>
         <FAQSection />
-        <FinalCTA />
+        <FinalCTA refQuery={refQuery || undefined} lgQuery={queryLg} />
         <FooterSection refQuery={refQuery} lgQuery={queryLg} />
         {showModal}
       </div>

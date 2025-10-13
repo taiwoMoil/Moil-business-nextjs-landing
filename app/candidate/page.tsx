@@ -63,18 +63,18 @@ export default function CandidatePage() {
           setQueryLg={setQueryLg}
           setShowLanguageModal={setShowLanguageModal}
         />
-        <CandidateHero onGetStarted={handleGetStarted} />
+        <CandidateHero onGetStarted={handleGetStarted} refQuery={refQuery || undefined} lgQuery={queryLg} />
         <div id="ai-resume">
-          <AIResumeSection />
+          <AIResumeSection refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
         <div id="voice-assistant">
-          <VoiceAssistantSection />
+          <VoiceAssistantSection refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
         <div id="bilingual">
-          <BilingualSection />
+          <BilingualSection refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
         <div id="stats">
-          <StatsSection />
+          <StatsSection refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
         <div id="testimonials">
           <TestimonialsSection />

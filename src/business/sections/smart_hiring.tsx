@@ -1,5 +1,7 @@
 "use client";
 
+import { openBusinessRegister } from "../utils/urlBuilder";
+
 const hiringHighlights = [
   {
     icon: (
@@ -91,7 +93,15 @@ const stats = [
   { number: "5,000+", label: "Jobs posted monthly" }
 ];
 
-export default function SmartHiring() {
+interface SmartHiringProps {
+  refQuery?: string;
+  lgQuery?: string;
+}
+
+export default function SmartHiring({ refQuery, lgQuery }: SmartHiringProps) {
+  const handleGenerateBusinessPlan = () => {
+    openBusinessRegister({ ref: refQuery, lg: lgQuery });
+  };
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-br from-white via-orange-50 to-[#FF6633]/20" id="hiring">
       {/* Sophisticated Background Elements */}
@@ -249,7 +259,10 @@ export default function SmartHiring() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button className="group relative bg-[#5843BD] text-white font-bold py-5 px-10 rounded-2xl transition-all duration-300 hover:scale-105 shadow-2xl overflow-hidden min-w-[200px]">
+                <button 
+                  onClick={handleGenerateBusinessPlan}
+                  className="group relative bg-[#5843BD] text-white font-bold py-5 px-10 rounded-2xl transition-all duration-300 hover:scale-105 shadow-2xl overflow-hidden min-w-[200px]"
+                >
                   {/* Button Shine Effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
                   <span className="relative flex items-center justify-center gap-2">

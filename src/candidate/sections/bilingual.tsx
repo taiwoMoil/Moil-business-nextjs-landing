@@ -1,6 +1,13 @@
 "use client";
 
-export default function BilingualSection() {
+import { openCandidateApp } from "../utils/urlBuilder";
+
+interface BilingualSectionProps {
+  refQuery?: string;
+  lgQuery?: string;
+}
+
+export default function BilingualSection({ refQuery, lgQuery }: BilingualSectionProps) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-white via-purple-50 to-[#5843BE]/20">
       {/* Grid Overlay */}
@@ -182,7 +189,10 @@ export default function BilingualSection() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button className="px-8 py-4 bg-gradient-to-r from-[#5843BE] to-[#4a3ba0] text-white font-semibold rounded-2xl hover:from-[#4a3ba0] hover:to-[#5843BE] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                <button 
+                  onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
+                  className="px-8 py-4 bg-gradient-to-r from-[#5843BE] to-[#4a3ba0] text-white font-semibold rounded-2xl hover:from-[#4a3ba0] hover:to-[#5843BE] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                >
                   Try Voice Features
                 </button>
                 <div className="flex items-center gap-4 text-sm text-gray-600">

@@ -1,6 +1,13 @@
 "use client";
 
-export default function AIResumeSection() {
+import { openCandidateApp } from "../utils/urlBuilder";
+
+interface AIResumeSectionProps {
+  refQuery?: string;
+  lgQuery?: string;
+}
+
+export default function AIResumeSection({ refQuery, lgQuery }: AIResumeSectionProps) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-white via-purple-50 to-[#5843BE]/20">
       {/* Grid Overlay */}
@@ -206,7 +213,10 @@ export default function AIResumeSection() {
             </div>
 
             {/* CTA Button */}
-            <button className="w-full px-6 py-4 bg-gradient-to-r from-[#5843BE] to-[#4a3ba0] text-white font-semibold rounded-2xl hover:from-[#4a3ba0] hover:to-[#5843BE] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+            <button 
+              onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
+              className="w-full px-6 py-4 bg-gradient-to-r from-[#5843BE] to-[#4a3ba0] text-white font-semibold rounded-2xl hover:from-[#4a3ba0] hover:to-[#5843BE] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
               Start Building Now
             </button>
             

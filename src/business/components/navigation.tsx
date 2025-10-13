@@ -83,44 +83,51 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
           <img src='https://res.cloudinary.com/drlcisipo/image/upload/v1705704261/Website%20images/logo_gox0fw.png' alt="Moil Logo" className="w-16 h-8" />
         </Link>
 
-        <div className="hidden  text-sm lg:flex space-x-6 items-center">
-          <TranslateButton className="bg-transparent flex items-center" textClassName="font-medium text-[#1A1433]" parentClass="" setShowLanguageModal={setShowLanguageModal} />
+        <div className="hidden text-xs lg:flex space-x-4 items-center">
+          <TranslateButton className="bg-transparent flex items-center" textClassName="font-medium text-[#1A1433] text-xs" parentClass="" setShowLanguageModal={setShowLanguageModal} />
 
           {page === "pricing" ? (
             <>
-              <Link href={`/business${queryString}#services`} className="px-5 py-3 text-[#1A1433]">
+              <Link href={`/business${queryString}#services`} className="px-3 py-2 text-[#1A1433] text-xs">
                 Services
               </Link>
-              <Link href={`/business${queryString}#features`} className="px-5 py-3 text-[#1A1433]">
+              <Link href={`/business${queryString}#features`} className="px-3 py-2 text-[#1A1433] text-xs">
                 Features
               </Link>
-              <Link href={`/business${queryString}#testimonials`} className="px-5 py-3 text-[#1A1433]">
+              <Link href={`/business${queryString}#testimonials`} className="px-3 py-2 text-[#1A1433] text-xs">
                 Testimonials
               </Link>
             </>
           ) : (
             <>
-              <button onClick={() => handleScrollTo('services')} className="px-5 py-3 text-[#1A1433]">
+              <button onClick={() => handleScrollTo('services')} className="px-3 py-2 text-[#1A1433] text-xs">
                 Services
               </button>
-              <button onClick={() => handleScrollTo('features')} className="px-5 py-3 text-[#1A1433]">
+              <button onClick={() => handleScrollTo('features')} className="px-3 py-2 text-[#1A1433] text-xs">
                 Features
               </button>
-              <button onClick={() => handleScrollTo('testimonials')} className="px-5 py-3 text-[#1A1433]">
+              <button onClick={() => handleScrollTo('testimonials')} className="px-3 py-2 text-[#1A1433] text-xs">
                 Testimonials
               </button>
             </>
           )}
 
 
-          <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" href={`/business/pricing${queryString}`} >
+          <Link 
+            href={`/candidate${queryString}`}
+            className="px-3 py-2 text-[#1A1433] text-xs hover:text-[#5843BE] transition-colors"
+          >
+            Switch to Candidate
+          </Link>
+
+          <Link className="px-3 py-2 text-[#1A1433] text-xs" href={`/business/pricing${queryString}`} >
             Pricing
           </Link>
 
-          <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" href={`${businessBaseUrl}/login${queryString}`} >
+          <Link className="px-3 py-2 text-[#1A1433] text-xs" href={`${businessBaseUrl}/login${queryString}`} >
             Login
           </Link>
-          <Link className="gradient-btn px-5 py-3 max-w-[135px] text-white" href={`${businessBaseUrl}/register${queryString}`} >
+          <Link className="gradient-btn px-4 py-2 text-white text-xs" href={`${businessBaseUrl}/register${queryString}`} >
             Get started
           </Link>
         </div>
@@ -179,18 +186,21 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
               </>
             )}
 
-            <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" href={`/business/pricing${queryString}`} >
+            <Link 
+              href={`/candidate${queryString}`}
+              className="px-5 py-3 text-[#1A1433] hover:text-[#5843BE] transition-colors"
+            >
+              Switch to Candidate
+            </Link>
+
+            <Link className="px-5 py-3 text-[#1A1433]" href={`/business/pricing${queryString}`} >
               Pricing
             </Link>
 
-            {/* <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" to={page === "pricing" ? '/business/pricing' : `pricing`} >
-              Pricing
-            </Link> */}
-
-            <Link className="px-5 py-3 max-w-[87px] text-[#1A1433]" href={`${businessBaseUrl}/login${queryString}`} >
+            <Link className="px-5 py-3 text-[#1A1433]" href={`${businessBaseUrl}/login${queryString}`} >
               Login
             </Link>
-            <Link className="gradient-btn px-5 py-3 max-w-[135px] text-white" href={`${businessBaseUrl}/register${queryString}`} >
+            <Link className="gradient-btn px-5 py-3 text-white" href={`${businessBaseUrl}/register${queryString}`} >
               Get started
             </Link>
           </div>

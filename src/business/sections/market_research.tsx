@@ -47,7 +47,7 @@ const businessPlanSteps = [
     id: 1,
     title: "Business Overview",
     description: "Analyzing your business model and core value proposition",
-    image: "business_overview.png",
+    image: "business_overview.jpg",
     color: "from-[#5843BD] to-[#4a3ba0]",
     duration: "2 min",
     icon: (
@@ -73,7 +73,7 @@ const businessPlanSteps = [
     id: 3,
     title: "Competitive Analysis",
     description: "Mapping competitors and market positioning",
-    image: "competitor.png",
+    image: "competitor.jpg",
     color: "from-[#5843BD] to-[#FF6633]",
     duration: "4 min",
     icon: (
@@ -84,27 +84,27 @@ const businessPlanSteps = [
   },
   {
     id: 4,
-    title: "Financial Projections",
-    description: "Creating revenue models and funding requirements",
-    image: "financials.png",
-    color: "from-[#FF6633] to-[#5843BD]",
-    duration: "3 min",
-    icon: (
-      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
-      </svg>
-    )
-  },
-  {
-    id: 5,
     title: "Business Model",
     description: "Finalizing your complete business strategy",
-    image: "business_model.png",
+    image: "business_model.jpg",
     color: "from-[#5843BD] to-[#4a3ba0]",
     duration: "2 min",
     icon: (
       <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
         <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"/>
+      </svg>
+    )
+  },
+  {
+    id: 5,
+    title: "Financial Projections",
+    description: "Creating revenue models and funding requirements",
+    image: "financials.jpg",
+    color: "from-[#FF6633] to-[#5843BD]",
+    duration: "3 min",
+    icon: (
+      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
       </svg>
     )
   }

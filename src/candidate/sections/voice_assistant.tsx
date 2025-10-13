@@ -1,6 +1,13 @@
 "use client";
 
-export default function VoiceAssistantSection() {
+import { openCandidateApp } from "../utils/urlBuilder";
+
+interface VoiceAssistantSectionProps {
+  refQuery?: string;
+  lgQuery?: string;
+}
+
+export default function VoiceAssistantSection({ refQuery, lgQuery }: VoiceAssistantSectionProps) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-white via-orange-50 to-[#FF6633]/20">
       {/* Grid Overlay */}
@@ -326,7 +333,10 @@ export default function VoiceAssistantSection() {
           {/* CTA Section */}
           <div className="bg-gradient-to-r from-gray-50 to-[#FF6633]/5 rounded-2xl p-6 text-center">
             <div className="max-w-md mx-auto space-y-4">
-              <button className="w-full px-8 py-4 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold rounded-2xl hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+              <button 
+                onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
+                className="w-full px-8 py-4 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold rounded-2xl hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+              >
                 Start Interview Practice Now
               </button>
               

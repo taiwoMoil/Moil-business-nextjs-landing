@@ -8,8 +8,7 @@ import HorizontalNFilterIcon from "../components/horizontal_btn";
 import DashboardQueryItem from "../components/dashboard_query_item";
 import { baseURL, workerBaseUrl } from "../../common/constants/baseUrl";
 import PaginationBtn from "../components/paginate_btn";
-import BackButton from "../components/back_button";
-import LoaderModal from "../components/loader_modal";
+
 
 interface JobPost {
   _id: string;
@@ -136,30 +135,64 @@ function SearchJobField({ accType = "client" }: SearchJobFieldProps) {
       />
 
       {/* Header Section */}
-      <div className="relative z-10 bg-white/80 backdrop-blur-lg border-b border-white/50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+      <div className="relative z-10 bg-gradient-to-r from-[#5843BE]/95 via-purple-600/95 to-[#FF6633]/95 backdrop-blur-xl border-b border-white/20 shadow-2xl">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-6 w-full lg:w-auto">
               <button
-                onClick={() => router.push("/")}
-                className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-xl border border-gray-200 hover:border-[#FF6633]/30 transition-all duration-300 group"
+                onClick={() => window.open("/candidate", "_self")}
+                className="flex items-center gap-3 px-6 py-3 bg-white/20 hover:bg-white/30 rounded-2xl border border-white/30 hover:border-white/50 transition-all duration-300 group backdrop-blur-sm shadow-lg hover:shadow-xl"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-600 group-hover:text-[#FF6633] transition-colors">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white group-hover:scale-110 transition-transform">
                   <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <span className="text-gray-700 font-medium">Back</span>
+                <span className="text-white font-semibold">Back to Home</span>
               </button>
               
-              <div className="hidden lg:flex items-center justify-end gap-6">
-                <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                  Find Your Perfect Job
-                </h1>
-                <p className="text-gray-600 mt-1">Discover opportunities that match your skills and aspirations</p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="currentColor" strokeWidth="2"/>
+                    <polyline points="3.27,6.96 12,12.01 20.73,6.96" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                </div>
+                <div className="text-left">
+                  <h1 className="text-2xl lg:text-4xl font-bold text-white leading-tight">
+                    Find Your Dream Job
+                  </h1>
+                  <p className="text-white/80 text-sm lg:text-base mt-1">
+                    Discover thousands of opportunities tailored to your skills
+                  </p>
+                </div>
               </div>
             </div>
 
+            {/* Quick Stats */}
+            <div className="hidden lg:flex items-center gap-8">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">10K+</div>
+                <div className="text-white/70 text-xs">Active Jobs</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">500+</div>
+                <div className="text-white/70 text-xs">Companies</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">95%</div>
+                <div className="text-white/70 text-xs">Success Rate</div>
+              </div>
+            </div>
           </div>
         </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-4 right-4 w-16 h-16 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-4 left-4 w-20 h-20 bg-[#FF6633]/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
 
       {/* Main Content */}
@@ -386,7 +419,6 @@ function SearchJobField({ accType = "client" }: SearchJobFieldProps) {
           </div>
         )}
 
-        {ourSearchLoading && <LoaderModal text="Finding the perfect jobs for you..." />}
       </div>
     </div>
   );

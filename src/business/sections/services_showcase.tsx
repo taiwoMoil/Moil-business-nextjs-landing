@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { businessBaseUrl } from "../../common/constants/baseUrl";
+import { openBusinessRegister } from "../utils/urlBuilder";
 
 const services = [
   {
@@ -142,7 +143,12 @@ const demoSections = [
   }
 ];
 
-export default function ServicesShowcase() {
+interface ServicesShowcaseProps {
+  refQuery?: string;
+  lgQuery?: string;
+}
+
+export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcaseProps) {
   const [activeTab, setActiveTab] = useState("demo");
   const [activeService, setActiveService] = useState("market-research");
   const [activeDemoSection, setActiveDemoSection] = useState("business-model");
@@ -412,7 +418,7 @@ export default function ServicesShowcase() {
                           <button
                             className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300"
                             style={{backgroundColor: section.color}}
-                            onClick={() => window.open(businessBaseUrl, '_blank')}
+                            onClick={() => openBusinessRegister({ ref: refQuery, lg: lgQuery })}
                           >
                             Generate Business Model Canvas
                           </button>
@@ -516,7 +522,7 @@ export default function ServicesShowcase() {
                           <button
                             className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300"
                             style={{backgroundColor: section.color}}
-                            onClick={() => window.open(businessBaseUrl, '_blank')}
+                            onClick={() => openBusinessRegister({ ref: refQuery, lg: lgQuery })}
                           >
                             Calculate Projections
                           </button>
@@ -574,7 +580,7 @@ export default function ServicesShowcase() {
                           <button
                             className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300"
                             style={{backgroundColor: section.color}}
-                            onClick={() => window.open(businessBaseUrl, '_blank')}
+                            onClick={() => openBusinessRegister({ ref: refQuery, lg: lgQuery })}
                           >
                             Analyze Competitors
                           </button>
@@ -628,7 +634,7 @@ export default function ServicesShowcase() {
                           <button
                             className="w-full text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-300"
                             style={{backgroundColor: section.color}}
-                            onClick={() => window.open(businessBaseUrl, '_blank')}
+                            onClick={() => openBusinessRegister({ ref: refQuery, lg: lgQuery })}
                           >
                             Generate Strategy
                           </button>

@@ -1,6 +1,13 @@
 "use client";
 
-export default function StatsSection() {
+import { openCandidateApp } from "../utils/urlBuilder";
+
+interface StatsSectionProps {
+  refQuery?: string;
+  lgQuery?: string;
+}
+
+export default function StatsSection({ refQuery, lgQuery }: StatsSectionProps) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-white via-orange-50 to-[#FF6633]/20">
       {/* Animated Background Elements */}
@@ -119,7 +126,10 @@ export default function StatsSection() {
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
             Join thousands of professionals who have already accelerated their careers with our AI-powered platform
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold rounded-2xl hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+          <button 
+            onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
+            className="px-8 py-4 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold rounded-2xl hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+          >
             Start Your Journey Today
           </button>
         </div>

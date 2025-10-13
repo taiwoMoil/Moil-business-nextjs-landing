@@ -1,12 +1,23 @@
 "use client";
 
 import Image from "next/image";
+import { openBusinessRegister } from "../utils/urlBuilder";
 
 interface EnhancedHeroProps {
   onGetStarted?: () => void;
+  refQuery?: string;
+  lgQuery?: string;
 }
 
-export default function EnhancedHero({ onGetStarted }: EnhancedHeroProps) {
+export default function EnhancedHero({ onGetStarted, refQuery, lgQuery }: EnhancedHeroProps) {
+  const handleGetStarted = () => {
+    openBusinessRegister({ ref: refQuery, lg: lgQuery });
+  };
+
+  const handleSeeDemo = () => {
+    // Scroll to the interactive demo section (services section)
+    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+  };
   return (
     <section className="hero-redesigned">
       {/* Animated Illustration Background */}
@@ -38,18 +49,20 @@ export default function EnhancedHero({ onGetStarted }: EnhancedHeroProps) {
             
             <div className="flex flex-col sm:flex-row gap-6 mb-12">
               <button 
-                onClick={onGetStarted}
+                onClick={handleGetStarted}
                 className="bg-gradient-to-r font-medium from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-orange-500/25"
               >
                 Get Started Free
               </button>
-              <button className="border-2 font-medium border-white/30 text-white hover:bg-white/10 font-semibold py-4 px-10 rounded-full text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-                Book a Demo
+              <button 
+                onClick={handleSeeDemo}
+                className="border-2 font-medium border-white/30 text-white hover:bg-white/10 font-semibold py-4 px-10 rounded-full text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+              >
+                See Demo
               </button>
             </div>
 
             {/* Key Features */}
-            
           </div>
           
           <div className="relative">

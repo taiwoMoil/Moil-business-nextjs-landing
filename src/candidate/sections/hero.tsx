@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import SearchComponent from "../components/search";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { openCandidateApp } from "../utils/urlBuilder";
 
 interface CandidateHeroProps {
   onGetStarted?: () => void;
@@ -107,12 +108,15 @@ export default function CandidateHero({ onGetStarted, refQuery, lgQuery }: Candi
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto">
           <button
-            onClick={onGetStarted}
+            onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
             className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-[#FF6633] to-[#ea580c] text-white font-semibold text-sm rounded-full hover:from-[#ea580c] hover:to-[#FF6633] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
           >
             CREATE PERSONAL PROFILE
           </button>
-          <button className="w-full sm:w-auto px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold text-sm rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105">
+          <button 
+            onClick={() => openCandidateApp({ ref: refQuery, lg: lgQuery })}
+            className="w-full sm:w-auto px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold text-sm rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105"
+          >
             LOGIN TO YOUR PROFILE
           </button>
         </div>

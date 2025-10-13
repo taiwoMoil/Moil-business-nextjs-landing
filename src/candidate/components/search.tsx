@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import Autocomplete from "react-google-autocomplete";
 
 export default function SearchComponent({ lgQuery }: any) {
@@ -10,7 +9,6 @@ export default function SearchComponent({ lgQuery }: any) {
     jobTitle: false,
     location: false,
   });
-  const router = useRouter();
   const jobTitleRef = useRef<HTMLInputElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
 
@@ -18,7 +16,8 @@ export default function SearchComponent({ lgQuery }: any) {
     let title_trim = title.trim();
     console.log("location", location);
     let location_trim = location.trim();
-    router.push(`/candidate/searchjob?title=${title_trim}&location=${location_trim}&page=1&lg=${lgQuery}`)
+    const searchUrl = `/candidate/searchjob?title=${title_trim}&location=${location_trim}&page=1&lg=${lgQuery}`;
+    window.open(searchUrl, '_self');
   }
 
   const handleMouseDown = (name: string) => {
@@ -125,7 +124,7 @@ export default function SearchComponent({ lgQuery }: any) {
                 /> */}
 
             <Autocomplete
-              apiKey="AIzaSyDS13cz8osXQeF7pdM3NzdazIKCJQtSJU0"
+              apiKey={process.env.GOOGLE_API_KEY_1}
               style={{ width: "90%" }}
               className="py-2 rounded-lg border-opacity-30 bg-white px-3 w-full border-none outline-none focus:ring-transparent focus:border-transparent focus:ring-[#5843BE] focus:ring-opacity-20"
               onPlaceSelected={(place) => {
