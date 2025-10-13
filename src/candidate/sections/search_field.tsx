@@ -142,7 +142,7 @@ function SearchJobField({ accType = "client" }: SearchJobFieldProps) {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-6 w-full lg:w-auto">
+            <div className="flex items-start md:items-center flex-col md:flex-row gap-y-4 gap-x-6 w-full lg:w-auto">
               <button
                 onClick={() => window.open("/candidate", "_self")}
                 className="flex items-center gap-3 px-6 py-3 bg-white/20 hover:bg-white/30 rounded-2xl border border-white/30 hover:border-white/50 transition-all duration-300 group backdrop-blur-sm shadow-lg hover:shadow-xl"
