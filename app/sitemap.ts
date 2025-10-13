@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
+import { baseURL1 } from '../src/common/constants/baseUrl'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://moilapp.com'
+  const baseUrl = baseURL1
   
   return [
     {

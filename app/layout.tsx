@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import Analytics from '../src/common/components/analytics';
+import { baseURL1 } from '../src/common/constants/baseUrl';
 
 const poppins = Poppins({ weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], subsets: ['latin'] });
 
@@ -36,14 +37,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://moilapp.com'),
+  metadataBase: new URL(baseURL1),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Moil | AI-Powered Business Growth Platform & Job Marketplace',
     description: 'Complete AI-powered platform for business growth and talent acquisition. Market research, business planning, smart hiring, and job search all in one place.',
-    url: 'https://moilapp.com',
+    url: baseURL1,
     siteName: 'Moil',
     images: [
       {
@@ -123,8 +124,8 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "Moil",
               "alternateName": "Moil Enterprise Inc.",
-              "url": "https://moilapp.com",
-              "logo": "https://moilapp.com/og_image.png",
+              "url": baseURL1,
+              "logo": `${baseURL1}/og_image.png`,
               "description": "AI-powered business growth platform and job marketplace. Complete solution for market research, business planning, smart hiring, and talent acquisition.",
               "foundingDate": "2023",
               "industry": "Business Software",
@@ -137,7 +138,7 @@ export default function RootLayout({
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "customer service",
-                "url": "https://moilapp.com"
+                "url": baseURL1
               },
               "sameAs": [
                 "https://twitter.com/MoilApp",
@@ -169,14 +170,14 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Moil",
-              "url": "https://moilapp.com",
+              "url": baseURL1,
               "description": "AI-powered business growth platform and job marketplace",
               "potentialAction": [
                 {
                   "@type": "SearchAction",
                   "target": {
                     "@type": "EntryPoint",
-                    "urlTemplate": "https://moilapp.com/candidate/searchjob?title={search_term_string}"
+                    "urlTemplate": `${baseURL1}/candidate/searchjob?title={search_term_string}`
                   },
                   "query-input": "required name=search_term_string"
                 }

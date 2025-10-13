@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { baseURL1 } from '../../src/common/constants/baseUrl';
 
 export const metadata: Metadata = {
   title: 'Find Jobs | AI-Powered Job Search & Career Platform | Moil',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Find Jobs | AI-Powered Job Search & Career Platform',
     description: 'Discover your dream job with AI-powered job search. Access thousands of opportunities and connect with top employers.',
-    url: 'https://moilapp.com/candidate',
+    url: `${baseURL1}/candidate`,
     images: ['/og_image.png'],
   },
   twitter: {
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     description: 'Discover your dream job with AI-powered job search. Access thousands of opportunities and connect with top employers.',
   },
   alternates: {
-    canonical: 'https://moilapp.com/candidate',
+    canonical: `${baseURL1}/candidate`,
   },
 };
 
@@ -50,8 +51,8 @@ export default function CandidateLayout({
             "applicationCategory": "LifestyleApplication",
             "operatingSystem": "Web",
             "description": "AI-powered job search platform connecting candidates with employers",
-            "url": "https://moilapp.com/candidate",
-            "screenshot": "https://moilapp.com/og_image.png",
+            "url": `${baseURL1}/candidate`,
+            "screenshot": `${baseURL1}/og_image.png`,
             "offers": {
               "@type": "Offer",
               "price": "0",
@@ -79,7 +80,7 @@ export default function CandidateLayout({
             "@type": "ItemList",
             "name": "Job Opportunities",
             "description": "Latest job opportunities available on Moil platform",
-            "url": "https://moilapp.com/candidate/searchjob",
+            "url": `${baseURL1}/candidate/searchjob`,
             "numberOfItems": "10000+"
           })
         }}

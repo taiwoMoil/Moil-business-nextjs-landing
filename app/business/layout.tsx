@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { baseURL1 } from '../../src/common/constants/baseUrl';
 
 export const metadata: Metadata = {
   title: 'Business Growth Platform | AI-Powered Market Research & Smart Hiring | Moil',
@@ -18,15 +19,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Business Growth Platform | AI-Powered Market Research & Smart Hiring',
     description: 'Transform your business with AI-powered market research, business planning, and smart hiring tools. Start your free trial today.',
-    url: 'https://moilapp.com/business',
-    images: ['/og_image.png'],
+    url: `${baseURL1}/business`,
+    images: ['/hero-business.jpg'],
   },
   twitter: {
     title: 'Business Growth Platform | AI-Powered Market Research & Smart Hiring',
     description: 'Transform your business with AI-powered market research, business planning, and smart hiring tools. Start your free trial today.',
   },
   alternates: {
-    canonical: 'https://moilapp.com/business',
+    canonical: `${baseURL1}/business`,
   },
 };
 
@@ -48,8 +49,8 @@ export default function BusinessLayout({
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Web",
             "description": "AI-powered business growth platform with market research, business planning, and smart hiring tools",
-            "url": "https://moilapp.com/business",
-            "screenshot": "https://moilapp.com/og_image.png",
+            "url": `${baseURL1}/business`,
+            "screenshot": `${baseURL1}/hero-business.jpg`,
             "offers": {
               "@type": "Offer",
               "price": "0",
