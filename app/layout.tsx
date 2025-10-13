@@ -1,50 +1,56 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
+import Analytics from '../src/common/components/analytics';
 
 const poppins = Poppins({ weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Moil | Connect Blue-Collar Workers with Employers',
+    default: 'Moil | AI-Powered Business Growth Platform & Job Marketplace',
     template: '%s | Moil'
   },
-  description: 'Moil connects skilled blue-collar workers with employers. Find jobs, hire talent, and build careers in construction, manufacturing, logistics, and more.',
+  description: 'Moil is the complete AI-powered platform for business growth and talent acquisition. Get market research, business planning, smart hiring tools, and access to thousands of jobs. Trusted by 500+ businesses.',
   keywords: [
-    'blue collar jobs',
-    'skilled labor',
-    'construction jobs',
-    'manufacturing jobs',
-    'logistics jobs',
-    'hire workers',
-    'job search',
-    'employment platform',
-    'skilled trades',
-    'worker recruitment'
+    'AI business platform',
+    'business growth tools',
+    'market research AI',
+    'business planning software',
+    'smart hiring platform',
+    'job marketplace',
+    'talent acquisition',
+    'business automation',
+    'AI market analysis',
+    'startup tools',
+    'SMB growth platform',
+    'hiring software',
+    'job search platform',
+    'business intelligence',
+    'workforce solutions'
   ],
   authors: [{ name: 'Moil Enterprise Inc.', url: 'https://moilapp.com' }],
   creator: 'Moil Enterprise Inc.',
   publisher: 'Moil Enterprise Inc.',
-  metadataBase: new URL('https://moilapp.com'),
-  alternates: {
-    canonical: 'https://moilapp.com',
-  },
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
+  metadataBase: new URL('https://moilapp.com'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'Moil | Connect Blue-Collar Workers with Employers',
-    description: 'The leading platform connecting skilled blue-collar workers with employers across various industries.',
+    title: 'Moil | AI-Powered Business Growth Platform & Job Marketplace',
+    description: 'Complete AI-powered platform for business growth and talent acquisition. Market research, business planning, smart hiring, and job search all in one place.',
     url: 'https://moilapp.com',
     siteName: 'Moil',
     images: [
       {
-        url: '/moil-og-image.jpg',
+        url: '/og_image.png',
         width: 1200,
         height: 630,
-        alt: 'Moil - Connecting Blue-Collar Workers with Employers',
+        alt: 'Moil - AI-Powered Business Growth Platform',
       },
     ],
     locale: 'en_US',
@@ -52,26 +58,43 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Moil | Blue-Collar Job Platform',
-    description: 'Connect skilled workers with employers. Find your next opportunity or hire top talent.',
-    images: ['/moil-og-image.jpg'],
+    title: 'Moil | AI-Powered Business Growth Platform & Job Marketplace',
+    description: 'Complete AI-powered platform for business growth and talent acquisition. Market research, business planning, smart hiring, and job search all in one place.',
+    images: ['/og_image.png'],
     creator: '@MoilApp',
+    site: '@MoilApp',
   },
   robots: {
     index: true,
     follow: true,
-    nocache: false,
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#5843BE' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+  verification: {
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+    yahoo: 'your-yahoo-verification-code',
+  },
   category: 'business',
-  classification: 'Employment and Recruitment Platform',
+  classification: 'AI Business Growth Platform',
 };
 
 export default function RootLayout({
@@ -85,13 +108,85 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#FF6633" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#5843BE" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="format-detection" content="telephone=no" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Moil",
+              "alternateName": "Moil Enterprise Inc.",
+              "url": "https://moilapp.com",
+              "logo": "https://moilapp.com/og_image.png",
+              "description": "AI-powered business growth platform and job marketplace. Complete solution for market research, business planning, smart hiring, and talent acquisition.",
+              "foundingDate": "2023",
+              "industry": "Business Software",
+              "numberOfEmployees": "11-50",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "US",
+                "addressRegion": "Texas"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "url": "https://moilapp.com"
+              },
+              "sameAs": [
+                "https://twitter.com/MoilApp",
+                "https://linkedin.com/company/moil-app"
+              ],
+              "offers": [
+                {
+                  "@type": "Offer",
+                  "name": "Business Growth Platform",
+                  "description": "AI-powered tools for market research, business planning, and smart hiring",
+                  "category": "Business Software"
+                },
+                {
+                  "@type": "Offer", 
+                  "name": "Job Marketplace",
+                  "description": "Connect with thousands of job opportunities and top talent",
+                  "category": "Employment Platform"
+                }
+              ]
+            })
+          }}
+        />
+        
+        {/* Website Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Moil",
+              "url": "https://moilapp.com",
+              "description": "AI-powered business growth platform and job marketplace",
+              "potentialAction": [
+                {
+                  "@type": "SearchAction",
+                  "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://moilapp.com/candidate/searchjob?title={search_term_string}"
+                  },
+                  "query-input": "required name=search_term_string"
+                }
+              ]
+            })
+          }}
+        />
       </head>
       <body className={`${poppins.className} antialiased`} suppressHydrationWarning={true}>
+        <Analytics />
         <div id="modal"></div>
         <div className="flex flex-col min-h-screen">
           <main className="flex-grow">

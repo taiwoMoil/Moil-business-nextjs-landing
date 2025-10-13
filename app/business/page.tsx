@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import FAQSection from "~~/src/business/sections/FAQ_section";
+import FAQSection from "../../src/business/sections/FAQ_section";
 import SelectLanguage from "../../src/common/components/selectLanguage";
 import FooterSection from "../../src/common/sections/footer";
 
