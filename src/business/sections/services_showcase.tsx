@@ -1471,9 +1471,8 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                 dangerouslySetInnerHTML={{ __html: cleanHtmlContent(modalContent.data) }}
               />
             </div>
-          </div>
 
-          <div className="p-6 border-t border-gray-200 bg-gray-50">
+             <div className="p-6 border-t border-gray-200 bg-gray-50">
             <button
               onClick={handleViewFullResults}
               className="w-full bg-gradient-to-r from-[#5843BD] to-[#FF6633] text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
@@ -1483,6 +1482,7 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
               </svg>
               View Entire Business Plan
             </button>
+          </div>
           </div>
         </div>
       )}
