@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { businessBaseUrl } from "../../common/constants/baseUrl";
 import { openBusinessRegister } from "../utils/urlBuilder";
+import { parseMarkdownToHtml } from "../../common/utils/markdownToHtml";
 
 const services = [
   {
@@ -176,6 +177,9 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
   const [audienceAnalysis, setAudienceAnalysis] = useState<any>(null);
   const [isGeneratingFinancials, setIsGeneratingFinancials] = useState(false);
   const [isGeneratingAudience, setIsGeneratingAudience] = useState(false);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [modalContent, setModalContent] = useState<any>(null);
+  const [modalTitle, setModalTitle] = useState('');
 
   const generateMarketInsights = (business: string, location: string, market: string): MarketInsights => {
     const locationData: Record<string, any> = {
@@ -333,11 +337,6 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
     }
   };
 
-  const handleViewFullResults = () => {
-    // Redirect to business register with referral tracking
-    openBusinessRegister({ ref: refQuery, lg: lgQuery });
-  };
-
   // Financial Projections API
   const handleFinancialProjections = async (data: any) => {
     // Validation
@@ -414,6 +413,25 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
     } finally {
       setIsGeneratingAudience(false);
     }
+  };
+
+  const handleViewFullResults = () => {
+    openBusinessRegister({
+      ref: refQuery,
+      lg: lgQuery
+    });
+  };
+
+  const handleViewDetailedModal = (content: any, title: string) => {
+    setModalContent(content);
+    setModalTitle(title);
+    setShowDetailModal(true);
+  };
+
+  const closeDetailModal = () => {
+    setShowDetailModal(false);
+    setModalContent(null);
+    setModalTitle('');
   };
 
   return (
@@ -618,12 +636,22 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">Industry</label>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Services</label>
                               <input
                                 type="text"
-                                value={formData.industry || ''}
-                                onChange={(e) => setFormData({...formData, industry: e.target.value})}
-                                placeholder="e.g., SaaS, E-commerce, Consulting"
+                                value={formData.services || ''}
+                                onChange={(e) => setFormData({...formData, services: e.target.value})}
+                                placeholder="e.g., Web Development, Digital Marketing, Consulting"
+                                className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">City</label>
+                              <input
+                                type="text"
+                                value={formData.city || ''}
+                                onChange={(e) => setFormData({...formData, city: e.target.value})}
+                                placeholder="e.g., Austin, New York, Los Angeles"
                                 className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
                               />
                             </div>
@@ -643,7 +671,8 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                             style={{backgroundColor: section.color}}
                             onClick={() => handleBusinessModelDemo({
                               businessName: formData.businessName || 'My Business',
-                              industry: formData.industry || 'Technology',
+                              services: formData.services || 'Technology Services',
+                              city: formData.city || 'Austin',
                               targetMarket: formData.targetMarket || 'Small businesses'
                             })}
                             disabled={isLoading}
@@ -657,14 +686,24 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                                 <h4 className="text-lg font-bold text-gray-800">AI-Generated Business Model</h4>
                                 <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Demo Preview</span>
                               </div>
-                              <div className="text-sm text-gray-700 whitespace-pre-line mb-4">
-                                {demoResults.data.substring(0, 300)}...
+                              <div className="mb-4 max-h-60 overflow-y-auto">
+                                <div className="bg-white/50 p-4 rounded-lg">
+                                  <div dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(demoResults.data.substring(0, 600)) }}></div>
+                                  {demoResults.data.length > 600 && (
+                                    <div className="mt-3 p-3 bg-gradient-to-r from-[#5843BD]/10 to-[#FF6633]/10 rounded-lg border-l-4 border-[#5843BD]">
+                                      <p className="text-sm text-gray-600 italic">
+                                        This is a preview of your complete business model analysis. 
+                                        View the full detailed report with actionable insights.
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
                               </div>
                               <button
-                                onClick={handleViewFullResults}
-                                className="w-full bg-gradient-to-r from-[#5843BD] to-[#FF6633] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                                onClick={() => handleViewDetailedModal(demoResults, 'Complete Business Model Analysis')}
+                                className="w-full bg-white border-2 border-[#5843BD] text-[#5843BD] py-3 px-4 rounded-lg font-semibold hover:bg-[#5843BD] hover:text-white transition-all duration-300"
                               >
-                                View Complete Analysis & Get Full Access
+                                View Complete Analysis
                               </button>
                             </div>
                           )}
@@ -728,10 +767,10 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                                 {demoResults.data.substring(0, 300)}...
                               </div>
                               <button
-                                onClick={handleViewFullResults}
-                                className="w-full bg-gradient-to-r from-[#FF6633] to-[#5843BD] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                                onClick={() => handleViewDetailedModal(demoResults, 'Complete Market Research Analysis')}
+                                className="w-full bg-white border-2 border-[#FF6633] text-[#FF6633] py-3 px-4 rounded-lg font-semibold hover:bg-[#FF6633] hover:text-white transition-all duration-300"
                               >
-                                View Complete Research & Get Full Access
+                                View Complete Analysis
                               </button>
                             </div>
                           )}
@@ -827,12 +866,6 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                                   <span className="font-bold text-green-600">{financialProjections.data.profitMargin}%</span>
                                 </div>
                               </div>
-                              <button
-                                onClick={handleViewFullResults}
-                                className="w-full bg-gradient-to-r from-[#FF6633] to-[#5843BD] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
-                              >
-                                Get Complete Financial Plan & Business Tools
-                              </button>
                             </div>
                           )}
                         </div>
@@ -895,10 +928,10 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                                 {demoResults.data.substring(0, 300)}...
                               </div>
                               <button
-                                onClick={handleViewFullResults}
-                                className="w-full bg-gradient-to-r from-[#5843BD] to-[#FF6633] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                                onClick={() => handleViewDetailedModal(demoResults, 'Complete Competitor Analysis')}
+                                className="w-full bg-white border-2 border-purple-500 text-purple-500 py-3 px-4 rounded-lg font-semibold hover:bg-purple-500 hover:text-white transition-all duration-300"
                               >
-                                View Complete Analysis & Get Full Access
+                                View Complete Analysis
                               </button>
                             </div>
                           )}
@@ -981,10 +1014,10 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                                 {demoResults.data.substring(0, 300)}...
                               </div>
                               <button
-                                onClick={handleViewFullResults}
-                                className="w-full bg-gradient-to-r from-[#FF6633] to-[#5843BD] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                                onClick={() => handleViewDetailedModal(demoResults, 'Complete Business Plan')}
+                                className="w-full bg-white border-2 border-orange-500 text-orange-500 py-3 px-4 rounded-lg font-semibold hover:bg-orange-500 hover:text-white transition-all duration-300"
                               >
-                                View Complete Business Plan & Get Full Access
+                                View Complete Analysis
                               </button>
                             </div>
                           )}
@@ -1046,15 +1079,19 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                                 <h4 className="text-lg font-bold text-gray-800">AI Audience Analysis</h4>
                                 <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Demo Preview</span>
                               </div>
-                              <div className="text-sm text-gray-700 whitespace-pre-line mb-4">
-                                {audienceAnalysis.data.substring(0, 400)}...
+                              <div className="mb-4 max-h-80 overflow-y-auto">
+                                <div className="bg-white/50 p-4 rounded-lg">
+                                  <div dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(audienceAnalysis.data.substring(0, 800)) }}></div>
+                                  {audienceAnalysis.data.length > 800 && (
+                                    <div className="mt-3 p-3 bg-gradient-to-r from-[#5843BD]/10 to-[#FF6633]/10 rounded-lg border-l-4 border-[#5843BD]">
+                                      <p className="text-sm text-gray-600 italic">
+                                        This is a preview of your complete audience analysis. 
+                                        Get the full detailed report with actionable insights and marketing strategies.
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
                               </div>
-                              <button
-                                onClick={handleViewFullResults}
-                                className="w-full bg-gradient-to-r from-[#FF6633] to-[#5843BD] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
-                              >
-                                Get Complete Audience Strategy & Marketing Tools
-                              </button>
                             </div>
                           )}
                         </div>
@@ -1063,20 +1100,6 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
 
                       {/* Action Buttons */}
                       <div className="flex flex-col md:flex-row gap-4 mt-8">
-                        <button 
-                          className="flex-1 py-4 px-6 rounded-xl font-bold text-white transition-all duration-300 hover:scale-105"
-                          style={{backgroundColor: section.color}}
-                          onClick={() => window.open(businessBaseUrl, '_blank')}
-                        >
-                          Get Full Analysis
-                        </button>
-                        <button 
-                          className="flex-1 py-4 px-6 rounded-xl font-bold transition-all duration-300"
-                          style={{color: section.color, backgroundColor: section.color + '20'}}
-                          onClick={() => window.open(businessBaseUrl, '_blank')}
-                        >
-                          Learn More
-                        </button>
                       </div>
                     </div>
                   )
@@ -1179,12 +1202,6 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                           onClick={() => window.open(businessBaseUrl, '_blank')}
                         >
                           Get Started Now
-                        </button>
-                        <button 
-                          className="flex-1 py-4 px-6 rounded-xl font-bold text-[#5843BD] bg-[#5843BD]/10 hover:bg-[#5843BD]/20 transition-all duration-300"
-                          onClick={() => window.open(businessBaseUrl, '_blank')}
-                        >
-                          Learn More
                         </button>
                       </div>
                     </div>
@@ -1428,6 +1445,31 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
           </div>
         </div>
       </div>
+
+      {/* Detail Modal */}
+      {showDetailModal && modalContent && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl h-[80vh] md:h-[75vh] overflow-hidden shadow-2xl mx-auto my-auto">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h3 className="text-2xl font-bold text-gray-800">{modalTitle}</h3>
+              <button
+                onClick={closeDetailModal}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+              <div 
+                className="prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(modalContent.data) }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

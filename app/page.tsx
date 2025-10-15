@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import { hasCookie } from 'cookies-next';
 import FAQSection from "~~/src/business/sections/FAQ_section";
 import SelectLanguage from "@/src/common/components/selectLanguage";
 import FooterSection from "@/src/common/sections/footer";
@@ -27,11 +28,15 @@ export default function BusinessPage() {
     const searchParams = new URLSearchParams(url.search);
     setRefQuery(searchParams.get('ref'));
 
+    // Check if user has selected a language before
     const tlang = localStorage.getItem("tlang");
-    if (tlang == null) {
+    const hasGoogleTransCookie = hasCookie('googtrans');
+    
+    // Show language modal if no language preference is set
+    if (!tlang && !hasGoogleTransCookie) {
       setTimeout(() => {
         setShowLanguageModal(true);
-      }, 50);
+      }, 1000); // Increased delay to ensure proper loading
     }
   }, []);
 

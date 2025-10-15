@@ -5,7 +5,8 @@ const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY_2 ||
 
 export interface BusinessModelRequest {
   businessName: string;
-  industry: string;
+  services: string;
+  city: string;
   targetMarket: string;
 }
 
@@ -48,16 +49,16 @@ export async function generateBusinessModel(data: BusinessModelRequest) {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
     
     const prompt = `
-    Generate a brief Business Model Canvas for a ${data.industry} business called "${data.businessName}" targeting ${data.targetMarket}.
+    Generate a concise Business Model Canvas for "${data.businessName}" offering ${data.services} services in ${data.city}, targeting ${data.targetMarket}.
     
-    Provide ONLY the following in a concise format (2-3 bullet points each):
+    Provide a brief analysis (maximum 600 characters) covering:
     
-    1. Value Propositions (key benefits)
-    2. Customer Segments (target customers)  
-    3. Revenue Streams (how money is made)
-    4. Key Activities (main business activities)
+    **Value Proposition:** Core benefits and unique selling points
+    **Revenue Model:** Key revenue streams and pricing
+    **Key Activities:** Core operations and critical tasks
+    **Partnerships:** Strategic partners in ${data.city}
     
-    Keep it brief and actionable. This is a demo preview.
+    Keep it concise, actionable, and location-specific for ${data.city}. Use markdown formatting.
     `;
 
     const result = await model.generateContent(prompt);
@@ -66,7 +67,8 @@ export async function generateBusinessModel(data: BusinessModelRequest) {
       success: true,
       data: response.text(),
       businessName: data.businessName,
-      industry: data.industry
+      services: data.services,
+      city: data.city
     };
   } catch (error) {
     console.error('Gemini API Error:', error);
@@ -84,16 +86,15 @@ export async function generateMarketResearch(data: MarketResearchRequest) {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
     
     const prompt = `
-    Provide brief market research insights for a ${data.businessType} business in ${data.location} targeting ${data.targetAudience}.
+    Provide concise market research for a ${data.businessType} business in ${data.location} targeting ${data.targetAudience}.
     
-    Include ONLY these key metrics (keep each to 1-2 sentences):
+    Maximum 600 characters covering:
+    **Market Size:** Estimated value and potential
+    **Demographics:** Key customer traits
+    **Growth:** Market trends and rate
+    **Opportunities:** 2-3 actionable insights
     
-    1. Market Size: Estimated market value and potential
-    2. Target Demographics: Key customer characteristics  
-    3. Growth Trends: Market growth rate and opportunities
-    4. Key Insights: 2-3 actionable insights
-    
-    Focus on realistic, data-driven insights. This is a demo preview.
+    Keep it brief, realistic, and data-driven. Use markdown formatting.
     `;
 
     const result = await model.generateContent(prompt);
@@ -120,16 +121,15 @@ export async function generateCompetitorAnalysis(data: CompetitorAnalysisRequest
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
     
     const prompt = `
-    Analyze the competitive landscape for "${data.businessName}" in the ${data.industry} industry in ${data.location}.
+    Analyze competitors for "${data.businessName}" in ${data.industry} industry, ${data.location}.
     
-    Provide brief analysis covering:
+    Maximum 600 characters covering:
+    **Main Competitors:** 2-3 key players
+    **Advantages:** Your potential differentiators
+    **Market Gaps:** Unaddressed opportunities
+    **Strategy:** Recommended positioning
     
-    1. Main Competitors: 2-3 key competitors in the market
-    2. Competitive Advantages: Potential differentiators
-    3. Market Gaps: Opportunities not being addressed
-    4. Positioning Strategy: Recommended market position
-    
-    Keep insights concise and actionable. This is a demo preview.
+    Keep it concise and actionable. Use markdown formatting.
     `;
 
     const result = await model.generateContent(prompt);
@@ -156,16 +156,15 @@ export async function generateBusinessPlan(data: BusinessPlanRequest) {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
     
     const prompt = `
-    Create a brief business plan outline for "${data.businessName}" in the ${data.industry} industry with a ${data.budget} budget over ${data.timeline}.
+    Create a concise business plan for "${data.businessName}" in ${data.industry} with ${data.budget} budget over ${data.timeline}.
     
-    Include these sections (2-3 points each):
+    Maximum 600 characters covering:
+    **Concept:** Business goals and vision
+    **Strategy:** Customer acquisition approach
+    **Financials:** Revenue and cost estimates
+    **Next Steps:** Immediate actions
     
-    1. Executive Summary: Business concept and goals
-    2. Market Strategy: How to reach customers
-    3. Financial Projections: Revenue and cost estimates
-    4. Next Steps: Immediate action items
-    
-    Keep it practical and focused. This is a demo preview.
+    Keep it practical and focused. Use markdown formatting.
     `;
 
     const result = await model.generateContent(prompt);
@@ -253,16 +252,15 @@ export async function generateAudienceAnalysis(data: AudienceAnalysisRequest) {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
     
     const prompt = `
-    Analyze the target audience for a ${data.businessType} business in ${data.location} within the ${data.industry} industry.
+    Analyze target audience for ${data.businessType} business in ${data.location}, ${data.industry} industry.
     
-    Provide ONLY these sections (2-3 bullet points each):
+    Maximum 600 characters covering:
+    **Demographics:** Age, income, lifestyle
+    **Behavior:** Shopping patterns and preferences
+    **Market Size:** Local potential and growth
+    **Strategy:** Best engagement channels
     
-    1. Primary Demographics: Age, income, lifestyle characteristics
-    2. Customer Behavior: Shopping patterns, preferences, decision factors
-    3. Market Size: Local market potential and growth opportunities
-    4. Engagement Strategy: Best channels and messaging approaches
-    
-    Keep it practical and actionable for business owners. This is a demo preview.
+    Keep it practical and actionable. Use markdown formatting.
     `;
 
     const result = await model.generateContent(prompt);

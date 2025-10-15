@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { setCookie } from 'cookies-next';
 import BackButton from "./back_button";
 
 interface SelectLanguageProps {
@@ -27,14 +28,11 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
   // When the English button is clicked, remain in English.
   const handleEnglishClick = () => {
     const newLang = "en";
-    setDefaultLang(newLang);
+    setDefaultLang("English");
     localStorage.setItem("tlang", newLang);
-
-    const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement;
-    if (combo) {
-      combo.value = newLang;
-      triggerHtmlEvent(combo, "change");
-    }
+    
+    // Set Google Translate cookie
+    setCookie('googtrans', '/auto/en');
 
     let url = new URL(window.location.href);
     console.log("Language changed to:", newLang);
@@ -50,21 +48,21 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     if (handleClick) {
       handleClick();
     }
+    
+    // Reload to apply language setting
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   };
 
   // When the Spanish button is clicked, translate page to Spanish.
   const handleSpanishClick = () => {
     const newLang = "es";
-    setDefaultLang(newLang);
+    setDefaultLang("Spanish");
     localStorage.setItem("tlang", newLang);
-
-    const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement;
-    for (let i = 0; i < 2; ++i) {
-      if (combo) {
-        combo.value = newLang;
-        triggerHtmlEvent(combo, "change");
-      }
-    }
+    
+    // Set Google Translate cookie
+    setCookie('googtrans', '/auto/es');
 
     let url = new URL(window.location.href);
     console.log("Language changed to:", newLang);
@@ -80,6 +78,11 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     if (handleClick) {
       handleClick();
     }
+    
+    // Reload to apply translation
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   };
 
   return (

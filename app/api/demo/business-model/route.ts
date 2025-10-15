@@ -4,12 +4,12 @@ import { generateBusinessModel } from '../../../../src/business/utils/geminiApi'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { businessName, industry, targetMarket } = body;
+    const { businessName, services, city, targetMarket } = body;
 
     // Validate required fields
-    if (!businessName || !industry || !targetMarket) {
+    if (!businessName || !services || !city || !targetMarket) {
       return NextResponse.json(
-        { error: 'Missing required fields: businessName, industry, targetMarket' },
+        { error: 'Missing required fields: businessName, services, city, targetMarket' },
         { status: 400 }
       );
     }
@@ -17,7 +17,8 @@ export async function POST(request: NextRequest) {
     // Generate business model using Gemini AI
     const result = await generateBusinessModel({
       businessName,
-      industry,
+      services,
+      city,
       targetMarket
     });
 
@@ -32,7 +33,8 @@ export async function POST(request: NextRequest) {
       success: true,
       data: result.data,
       businessName: result.businessName,
-      industry: result.industry,
+      services: result.services,
+      city: result.city,
       message: 'Business model generated successfully'
     });
 

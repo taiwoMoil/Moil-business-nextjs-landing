@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 // Local Imports
-import TranslateButton from "./translate_btn";
+import CustomTranslateButton from "../../common/components/CustomTranslateButton";
 import { businessBaseUrl, workerBaseUrl } from "../../common/constants/baseUrl";
 
 interface BusinessNavigationProps {
@@ -83,7 +83,12 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
         </Link>
 
         <div className="hidden lg:flex items-center space-x-1 bg-gray-100/80 rounded-full p-1">
-          <TranslateButton className="bg-transparent flex items-center px-3 py-2 rounded-full hover:bg-white/50 transition-all" textClassName="font-medium text-[#1A1433] text-xs" parentClass="" setShowLanguageModal={setShowLanguageModal} />
+          <CustomTranslateButton 
+            variant="business"
+            className="bg-transparent"
+            textClassName="font-medium text-[#1A1433] text-xs"
+            setShowLanguageModal={setShowLanguageModal} 
+          />
 
           {page === "pricing" ? (
             <>

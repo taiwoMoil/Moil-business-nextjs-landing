@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { openCandidateApp, buildCandidateUrl, openCandidateRegister } from "../utils/urlBuilder";
+import CustomTranslateButton from "../../common/components/CustomTranslateButton";
 
 interface CandidateNavigationProps {
   page: string;
@@ -82,13 +83,10 @@ export default function CandidateNavigation({
 
           {/* Header Actions - Desktop */}
           <div className="hidden lg:flex items-center space-x-2">
-            <button 
-              onClick={() => setShowLanguageModal(true)}
-              className="flex items-center space-x-1 px-3 py-2 text-xs text-gray-600 hover:text-[#5843BE] rounded-full hover:bg-gray-100/50 transition-all"
-            >
-              <span>🌍</span>
-              <span>ESP</span>
-            </button>
+            <CustomTranslateButton 
+              variant="candidate"
+              setShowLanguageModal={setShowLanguageModal}
+            />
             <Link 
               href="/business" 
               className="text-xs text-gray-600 hover:text-[#5843BE] transition-colors px-3 py-2 rounded-full hover:bg-gray-100/50"
@@ -171,16 +169,11 @@ export default function CandidateNavigation({
 
               {/* Mobile Actions */}
               <div className="pt-3 border-t border-gray-200/50 space-y-1">
-                <button 
-                  onClick={() => {
-                    setShowLanguageModal(true);
-                    setIsMobileMenuOpen(false);
-                  }}
+                <CustomTranslateButton 
+                  variant="candidate"
+                  setShowLanguageModal={setShowLanguageModal}
                   className="flex items-center space-x-3 w-full px-4 py-3 text-sm text-gray-600 hover:bg-gray-100/50 rounded-lg transition-all"
-                >
-                  <span>🌍</span>
-                  <span>Change Language (ESP)</span>
-                </button>
+                />
                 <Link 
                   href="/business" 
                   className="block px-4 py-3 text-sm text-gray-600 hover:bg-gray-100/50 rounded-lg transition-all"
