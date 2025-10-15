@@ -99,7 +99,7 @@ const businessPlanSteps = [
     id: 5,
     title: "Financial Projections",
     description: "Creating revenue models and funding requirements",
-    image: "financials.jpg",
+    image: "Financials.jpg",
     color: "from-[#FF6633] to-[#5843BD]",
     duration: "3 min",
     icon: (
