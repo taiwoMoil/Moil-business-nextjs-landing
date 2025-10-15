@@ -51,14 +51,16 @@ export async function generateBusinessModel(data: BusinessModelRequest) {
     const prompt = `
     Generate a concise Business Model Canvas for "${data.businessName}" offering ${data.services} services in ${data.city}, targeting ${data.targetMarket}.
     
-    Provide a brief analysis (maximum 600 characters) covering:
+    Return ONLY beautifully formatted HTML (maximum 600 characters) covering:
     
-    **Value Proposition:** Core benefits and unique selling points
-    **Revenue Model:** Key revenue streams and pricing
-    **Key Activities:** Core operations and critical tasks
-    **Partnerships:** Strategic partners in ${data.city}
+    <div class="space-y-4">
+      <div><h3 class="font-bold text-gray-800 mb-2">Value Proposition</h3><p class="text-sm text-gray-700">Core benefits and unique selling points</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Revenue Model</h3><p class="text-sm text-gray-700">Key revenue streams and pricing</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Key Activities</h3><p class="text-sm text-gray-700">Core operations and critical tasks</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Partnerships</h3><p class="text-sm text-gray-700">Strategic partners in ${data.city}</p></div>
+    </div>
     
-    Keep it concise, actionable, and location-specific for ${data.city}. Use markdown formatting.
+    Return ONLY the HTML with Tailwind CSS classes. Keep it concise and actionable.
     `;
 
     const result = await model.generateContent(prompt);
@@ -88,13 +90,16 @@ export async function generateMarketResearch(data: MarketResearchRequest) {
     const prompt = `
     Provide concise market research for a ${data.businessType} business in ${data.location} targeting ${data.targetAudience}.
     
-    Maximum 600 characters covering:
-    **Market Size:** Estimated value and potential
-    **Demographics:** Key customer traits
-    **Growth:** Market trends and rate
-    **Opportunities:** 2-3 actionable insights
+    Return ONLY beautifully formatted HTML (maximum 600 characters):
     
-    Keep it brief, realistic, and data-driven. Use markdown formatting.
+    <div class="space-y-4">
+      <div><h3 class="font-bold text-gray-800 mb-2">Market Size</h3><p class="text-sm text-gray-700">Estimated value and potential</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Demographics</h3><p class="text-sm text-gray-700">Key customer traits</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Growth</h3><p class="text-sm text-gray-700">Market trends and rate</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Opportunities</h3><p class="text-sm text-gray-700">2-3 actionable insights</p></div>
+    </div>
+    
+    Return ONLY the HTML with Tailwind CSS classes. Keep it brief and data-driven.
     `;
 
     const result = await model.generateContent(prompt);
@@ -123,13 +128,16 @@ export async function generateCompetitorAnalysis(data: CompetitorAnalysisRequest
     const prompt = `
     Analyze competitors for "${data.businessName}" in ${data.industry} industry, ${data.location}.
     
-    Maximum 600 characters covering:
-    **Main Competitors:** 2-3 key players
-    **Advantages:** Your potential differentiators
-    **Market Gaps:** Unaddressed opportunities
-    **Strategy:** Recommended positioning
+    Return ONLY beautifully formatted HTML (maximum 600 characters):
     
-    Keep it concise and actionable. Use markdown formatting.
+    <div class="space-y-4">
+      <div><h3 class="font-bold text-gray-800 mb-2">Main Competitors</h3><p class="text-sm text-gray-700">2-3 key players</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Your Advantages</h3><p class="text-sm text-gray-700">Potential differentiators</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Market Gaps</h3><p class="text-sm text-gray-700">Unaddressed opportunities</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Strategy</h3><p class="text-sm text-gray-700">Recommended positioning</p></div>
+    </div>
+    
+    Return ONLY the HTML with Tailwind CSS classes. Keep it concise and actionable.
     `;
 
     const result = await model.generateContent(prompt);
@@ -158,13 +166,16 @@ export async function generateBusinessPlan(data: BusinessPlanRequest) {
     const prompt = `
     Create a concise business plan for "${data.businessName}" in ${data.industry} with ${data.budget} budget over ${data.timeline}.
     
-    Maximum 600 characters covering:
-    **Concept:** Business goals and vision
-    **Strategy:** Customer acquisition approach
-    **Financials:** Revenue and cost estimates
-    **Next Steps:** Immediate actions
+    Return ONLY beautifully formatted HTML (maximum 600 characters):
     
-    Keep it practical and focused. Use markdown formatting.
+    <div class="space-y-4">
+      <div><h3 class="font-bold text-gray-800 mb-2">Concept</h3><p class="text-sm text-gray-700">Business goals and vision</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Strategy</h3><p class="text-sm text-gray-700">Customer acquisition approach</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Financials</h3><p class="text-sm text-gray-700">Revenue and cost estimates</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Next Steps</h3><p class="text-sm text-gray-700">Immediate actions</p></div>
+    </div>
+    
+    Return ONLY the HTML with Tailwind CSS classes. Keep it practical and focused.
     `;
 
     const result = await model.generateContent(prompt);
@@ -254,13 +265,16 @@ export async function generateAudienceAnalysis(data: AudienceAnalysisRequest) {
     const prompt = `
     Analyze target audience for ${data.businessType} business in ${data.location}, ${data.industry} industry.
     
-    Maximum 600 characters covering:
-    **Demographics:** Age, income, lifestyle
-    **Behavior:** Shopping patterns and preferences
-    **Market Size:** Local potential and growth
-    **Strategy:** Best engagement channels
+    Return ONLY beautifully formatted HTML (maximum 600 characters):
     
-    Keep it practical and actionable. Use markdown formatting.
+    <div class="space-y-4">
+      <div><h3 class="font-bold text-gray-800 mb-2">Demographics</h3><p class="text-sm text-gray-700">Age, income, lifestyle</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Behavior</h3><p class="text-sm text-gray-700">Shopping patterns and preferences</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Market Size</h3><p class="text-sm text-gray-700">Local potential and growth</p></div>
+      <div><h3 class="font-bold text-gray-800 mb-2">Strategy</h3><p class="text-sm text-gray-700">Best engagement channels</p></div>
+    </div>
+    
+    Return ONLY the HTML with Tailwind CSS classes. Keep it practical and actionable.
     `;
 
     const result = await model.generateContent(prompt);

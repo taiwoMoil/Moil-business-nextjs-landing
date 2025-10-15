@@ -3,7 +3,18 @@
 import { useState } from "react";
 import { businessBaseUrl } from "../../common/constants/baseUrl";
 import { openBusinessRegister } from "../utils/urlBuilder";
-import { parseMarkdownToHtml } from "../../common/utils/markdownToHtml";
+// Removed markdown import since we're using HTML directly from Gemini
+
+// Helper function to clean HTML from code block markers
+const cleanHtmlContent = (htmlString: string): string => {
+  if (!htmlString) return '';
+  
+  return htmlString
+    .replace(/```html\s*/gi, '') // Remove opening ```html
+    .replace(/```\s*$/gi, '')    // Remove closing ```
+    .replace(/^\s*```\s*/gi, '') // Remove any leading ```
+    .trim();
+};
 
 const services = [
   {
@@ -223,13 +234,6 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
     const projectedRevenue = Math.floor(parseInt(bizData.avgRevenue.replace('$', '').replace('K', '')) * (0.8 + Math.random() * 0.4));
 
     return { business, location, locData, mktData, bizData, projectedRevenue };
-  };
-
-  const handleGenerateResearch = () => {
-    const businessValue = businessType || 'Restaurant';
-    const generatedInsights = generateMarketInsights(businessValue, location, targetMarket);
-    setInsights(generatedInsights);
-    setShowResults(true);
   };
 
   // API Integration Functions
@@ -688,7 +692,7 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                               </div>
                               <div className="mb-4 max-h-60 overflow-y-auto">
                                 <div className="bg-white/50 p-4 rounded-lg">
-                                  <div dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(demoResults.data.substring(0, 600)) }}></div>
+                                  <div dangerouslySetInnerHTML={{ __html: cleanHtmlContent(demoResults.data.substring(0, 600)) }} />
                                   {demoResults.data.length > 600 && (
                                     <div className="mt-3 p-3 bg-gradient-to-r from-[#5843BD]/10 to-[#FF6633]/10 rounded-lg border-l-4 border-[#5843BD]">
                                       <p className="text-sm text-gray-600 italic">
@@ -1081,7 +1085,7 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                               </div>
                               <div className="mb-4 max-h-80 overflow-y-auto">
                                 <div className="bg-white/50 p-4 rounded-lg">
-                                  <div dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(audienceAnalysis.data.substring(0, 800)) }}></div>
+                                  <div dangerouslySetInnerHTML={{ __html: cleanHtmlContent(audienceAnalysis.data.substring(0, 800)) }} />
                                   {audienceAnalysis.data.length > 800 && (
                                     <div className="mt-3 p-3 bg-gradient-to-r from-[#5843BD]/10 to-[#FF6633]/10 rounded-lg border-l-4 border-[#5843BD]">
                                       <p className="text-sm text-gray-600 italic">
@@ -1464,9 +1468,21 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
               <div 
                 className="prose prose-sm max-w-none"
-                dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(modalContent.data) }}
+                dangerouslySetInnerHTML={{ __html: cleanHtmlContent(modalContent.data) }}
               />
             </div>
+          </div>
+
+          <div className="p-6 border-t border-gray-200 bg-gray-50">
+            <button
+              onClick={handleViewFullResults}
+              className="w-full bg-gradient-to-r from-[#5843BD] to-[#FF6633] text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              View Entire Business Plan
+            </button>
           </div>
         </div>
       )}
