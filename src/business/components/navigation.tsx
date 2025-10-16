@@ -198,6 +198,18 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
 
             
             <div className="pt-3 border-t border-gray-200/50 space-y-1">
+              {/* Mobile Translate Button */}
+              <CustomTranslateButton 
+                variant="business"
+                className="w-full px-4 py-3 text-sm text-[#1A1433] hover:bg-gray-100/50 rounded-lg transition-all justify-start"
+                textClassName="font-medium text-[#1A1433] text-sm"
+                setShowLanguageModal={setShowLanguageModal}
+                setLgQuery={setQueryLg}
+                lgQuery={lgQuery}
+                showText={true}
+                showIcon={true}
+              />
+              
               <Link 
                 href={`/candidate${queryString}`}
                 className="block px-4 py-3 text-sm text-[#1A1433] hover:bg-gray-100/50 rounded-lg transition-all"

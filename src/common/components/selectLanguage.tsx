@@ -29,8 +29,11 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     console.log("Updated URL:", url.toString());
 
     if (typeof setQueryLg === "function") {
+      console.log('SelectLanguage: About to call setQueryLg with English:', newLang);
       setQueryLg(newLang);
-      console.log('SelectLanguage: setQueryLg called with:', newLang);
+      console.log('SelectLanguage: setQueryLg called successfully with English:', newLang);
+    } else {
+      console.error('SelectLanguage: setQueryLg is not a function for English!', typeof setQueryLg);
     }
 
     window.history.replaceState({}, "", url);
@@ -57,8 +60,11 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     console.log("Updated URL:", url.toString());
 
     if (typeof setQueryLg === "function") {
+      console.log('SelectLanguage: About to call setQueryLg with Spanish:', newLang);
       setQueryLg(newLang);
-      console.log('SelectLanguage: setQueryLg called with:', newLang);
+      console.log('SelectLanguage: setQueryLg called successfully with Spanish:', newLang);
+    } else {
+      console.error('SelectLanguage: setQueryLg is not a function for Spanish!', typeof setQueryLg);
     }
 
     window.history.replaceState({}, "", url);
