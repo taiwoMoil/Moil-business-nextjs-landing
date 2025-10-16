@@ -87,6 +87,7 @@ export default function CandidateNavigation({
               variant="candidate"
               setShowLanguageModal={setShowLanguageModal}
               setLgQuery={setQueryLg}
+              lgQuery={lgQuery}
             />
             <Link 
               href="/business" 
@@ -174,10 +175,11 @@ export default function CandidateNavigation({
                   variant="candidate"
                   setShowLanguageModal={setShowLanguageModal}
                   setLgQuery={setQueryLg}
+                  lgQuery={lgQuery}
                   className="flex items-center space-x-3 w-full px-4 py-3 text-sm text-gray-600 hover:bg-gray-100/50 rounded-lg transition-all"
                 />
                 <Link 
-                  href="/business" 
+                  href={`/business?lg=${lgQuery}`}
                   className="block px-4 py-3 text-sm text-gray-600 hover:bg-gray-100/50 rounded-lg transition-all"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

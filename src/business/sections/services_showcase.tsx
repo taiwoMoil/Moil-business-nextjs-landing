@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { businessBaseUrl } from "../../common/constants/baseUrl";
-import { openBusinessRegister } from "../utils/urlBuilder";
+import { openBusinessRegister, buildBusinessUrl } from "../utils/urlBuilder";
 // Removed markdown import since we're using HTML directly from Gemini
 
 // Helper function to clean HTML from code block markers
@@ -1381,7 +1381,7 @@ export default function ServicesShowcase({ refQuery, lgQuery }: ServicesShowcase
                     </div>
                     <button
                       className="w-full bg-white text-[#FF6633] py-3 px-4 md:py-4 lg:py-5 md:px-6 lg:px-8 rounded-xl md:rounded-2xl font-bold md:font-black text-sm md:text-base lg:text-lg hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-white/20 hover:scale-105 flex items-center justify-center gap-2 md:gap-3 group"
-                      onClick={() => window.open(businessBaseUrl, '_blank')}
+                      onClick={() => window.open(buildBusinessUrl({ lg: lgQuery, ref: refQuery }), '_blank')}
                     >
                       <span className="text-xs md:text-sm font-medium">Get Your Market Research</span>
                       <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">

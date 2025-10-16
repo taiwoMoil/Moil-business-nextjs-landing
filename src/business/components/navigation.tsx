@@ -89,6 +89,7 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
             textClassName="font-medium text-[#1A1433] text-xs"
             setShowLanguageModal={setShowLanguageModal}
             setLgQuery={setQueryLg}
+            lgQuery={lgQuery}
           />
 
           {page === "pricing" ? (

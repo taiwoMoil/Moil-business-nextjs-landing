@@ -11,54 +11,29 @@ interface SelectLanguageProps {
 const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
   const [defaultLang, setDefaultLang] = useState("");
 
-  // Function to trigger Google Translate language change
-  const triggerGoogleTranslate = (language: string) => {
-    // Wait for Google Translate to be available
-    const checkForTranslateElement = () => {
-      const translateElement = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-      if (translateElement) {
-        translateElement.value = language;
-        const event = new Event('change', { bubbles: true });
-        translateElement.dispatchEvent(event);
-        return true;
-      }
-      return false;
-    };
-
-    // Try immediately, then retry with delays if needed
-    if (!checkForTranslateElement()) {
-      setTimeout(() => {
-        if (!checkForTranslateElement()) {
-          setTimeout(() => {
-            checkForTranslateElement();
-          }, 500);
-        }
-      }, 100);
-    }
-  };
 
   // When the English button is clicked, remain in English.
   const handleEnglishClick = () => {
     const newLang = "en";
+    console.log('SelectLanguage: English selected');
     setDefaultLang("English");
     localStorage.setItem("tlang", newLang);
     
-    // Set Google Translate cookie
-    setCookie('googtrans', '/auto/en');
+    // Set Google Translate cookie (tutorial approach)
+    setCookie('googtrans', '/auto/en', { path: '/', domain: window.location.hostname });
+    console.log('SelectLanguage: Cookie set for English');
 
     let url = new URL(window.location.href);
     console.log("Language changed to:", newLang);
     url.searchParams.set("lg", newLang);
-    console.log("Updated URL:", url);
+    console.log("Updated URL:", url.toString());
 
     if (typeof setQueryLg === "function") {
       setQueryLg(newLang);
+      console.log('SelectLanguage: setQueryLg called with:', newLang);
     }
 
     window.history.replaceState({}, "", url);
-
-    // Trigger Google Translate without reload
-    triggerGoogleTranslate('en');
 
     if (handleClick) {
       handleClick();
@@ -68,25 +43,25 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
   // When the Spanish button is clicked, translate page to Spanish.
   const handleSpanishClick = () => {
     const newLang = "es";
+    console.log('SelectLanguage: Spanish selected');
     setDefaultLang("Spanish");
     localStorage.setItem("tlang", newLang);
     
-    // Set Google Translate cookie
-    setCookie('googtrans', '/auto/es');
+    // Set Google Translate cookie (tutorial approach)
+    setCookie('googtrans', '/auto/es', { path: '/', domain: window.location.hostname });
+    console.log('SelectLanguage: Cookie set for Spanish');
 
     let url = new URL(window.location.href);
     console.log("Language changed to:", newLang);
     url.searchParams.set("lg", newLang);
-    console.log("Updated URL:", url);
+    console.log("Updated URL:", url.toString());
 
     if (typeof setQueryLg === "function") {
       setQueryLg(newLang);
+      console.log('SelectLanguage: setQueryLg called with:', newLang);
     }
 
     window.history.replaceState({}, "", url);
-
-    // Trigger Google Translate without reload
-    triggerGoogleTranslate('es');
 
     if (handleClick) {
       handleClick();

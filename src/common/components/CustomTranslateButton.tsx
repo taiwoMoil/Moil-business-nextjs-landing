@@ -5,6 +5,7 @@ import { getCookie, hasCookie, setCookie } from 'cookies-next';
 interface CustomTranslateButtonProps {
   setShowLanguageModal: (show: boolean) => void;
   setLgQuery?: (lang: string) => void;
+  lgQuery?: string; // Add lgQuery prop to receive language changes
   parentClass?: string;
   className?: string;
   textClassName?: string;
@@ -17,6 +18,7 @@ interface CustomTranslateButtonProps {
 const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
   setShowLanguageModal,
   setLgQuery,
+  lgQuery,
   parentClass = '',
   className = '',
   textClassName = '',
@@ -27,93 +29,127 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
 }) => {
   const [currentLang, setCurrentLang] = useState<'en' | 'es'>('en');
   const [isTranslating, setIsTranslating] = useState(false);
+  const [selected, setSelected] = useState<string>('/auto/en');
 
-  useEffect(() => {
-    // Load Google Translate script
-    var addScript = document.createElement('script');
-    addScript.setAttribute('src', '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit');
-    document.body.appendChild(addScript);
-    window.googleTranslateElementInit = googleTranslateElementInit;
-
-    // Check current language from cookie
-    if (hasCookie('googtrans')) {
-      const cookieValue = getCookie('googtrans') as string;
-      const detectedLang = cookieValue === '/auto/es' ? 'es' : 'en';
-      setCurrentLang(detectedLang);
-      
-      // Set initial lgQuery if callback is provided
-      if (setLgQuery) {
-        setLgQuery(detectedLang);
-      }
-    } else if (setLgQuery) {
-      // Set default language if no cookie exists
-      setLgQuery('en');
-    }
-
-    return () => {
-      if (document.body.contains(addScript)) {
-        document.body.removeChild(addScript);
-      }
-      delete window.googleTranslateElementInit;
-    };
-  }, [setLgQuery]);
-
+  // Google Translate initialization function (simplified approach)
   const googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement({
-      pageLanguage: 'en',
-      autoDisplay: false,
-      includedLanguages: "es,en",
-      layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
+    console.log('Initializing Google Translate...');
+    
+    try {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: 'auto',
+          autoDisplay: false,
+          includedLanguages: "es,en",
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        'google_translate_element'
+      );
+      console.log('Google Translate initialized successfully');
+    } catch (error) {
+      console.error('Error initializing Google Translate:', error);
+    }
   };
 
-  const toggleLanguage = useCallback(() => {
-    const newLang = currentLang === 'en' ? 'es' : 'en';
+  // Language change handler (following tutorial approach)
+  const handleLanguageChange = (newLang: 'en' | 'es') => {
+    console.log(`Changing language to: ${newLang}`);
+    
     const cookieValue = newLang === 'es' ? '/auto/es' : '/auto/en';
     
-    setCookie('googtrans', cookieValue);
+    // Set cookie
+    setCookie('googtrans', cookieValue, { path: '/', domain: window.location.hostname });
+    setSelected(cookieValue);
     setCurrentLang(newLang);
     
-    // Update lgQuery if callback is provided
+    // Update lgQuery for external links
     if (setLgQuery) {
       setLgQuery(newLang);
     }
     
-    // Trigger Google Translate without reload
-    const triggerGoogleTranslate = (language: string) => {
-      const checkForTranslateElement = () => {
-        const translateElement = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-        if (translateElement) {
-          translateElement.value = language;
-          const event = new Event('change', { bubbles: true });
-          translateElement.dispatchEvent(event);
-          return true;
-        }
-        return false;
-      };
-
-      if (!checkForTranslateElement()) {
-        setTimeout(() => {
-          if (!checkForTranslateElement()) {
-            setTimeout(() => {
-              checkForTranslateElement();
-            }, 500);
-          }
-        }, 100);
-      }
-    };
+    // Update URL parameter
+    const url = new URL(window.location.href);
+    url.searchParams.set('lg', newLang);
+    window.history.replaceState({}, '', url);
     
-    triggerGoogleTranslate(newLang);
-  }, [currentLang, setLgQuery]);
+    // Reload page to apply translation (as per tutorial)
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  };
+
+  // Load Google Translate script (simplified tutorial approach)
+  useEffect(() => {
+    console.log('Loading Google Translate script...');
+    
+    // Check if script already exists
+    const existingScript = document.querySelector('script[src*="translate.google.com/translate_a/element.js"]');
+    
+    if (!existingScript) {
+      var addScript = document.createElement('script');
+      addScript.setAttribute('src', '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit');
+      document.body.appendChild(addScript);
+      window.googleTranslateElementInit = googleTranslateElementInit;
+      console.log('Google Translate script added');
+    } else {
+      console.log('Google Translate script already exists');
+      window.googleTranslateElementInit = googleTranslateElementInit;
+    }
+  }, []);
+
+  // Initialize language from cookie or URL (tutorial approach)
+  useEffect(() => {
+    console.log('Initializing language state...');
+    
+    // Check URL parameter first
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLang = urlParams.get('lg');
+    
+    if (urlLang && (urlLang === 'en' || urlLang === 'es')) {
+      const cookieValue = urlLang === 'es' ? '/auto/es' : '/auto/en';
+      setSelected(cookieValue);
+      setCurrentLang(urlLang);
+      if (setLgQuery) {
+        setLgQuery(urlLang);
+      }
+    } else if (hasCookie('googtrans')) {
+      const cookieValue = getCookie('googtrans') as string;
+      setSelected(cookieValue);
+      const detectedLang = cookieValue === '/auto/es' ? 'es' : 'en';
+      setCurrentLang(detectedLang);
+      if (setLgQuery) {
+        setLgQuery(detectedLang);
+      }
+    } else {
+      setSelected('/auto/en');
+      setCurrentLang('en');
+      if (setLgQuery) {
+        setLgQuery('en');
+      }
+    }
+  }, [setLgQuery]);
+
+  // Listen for language changes from the modal (simplified)
+  useEffect(() => {
+    if (lgQuery && (lgQuery === 'en' || lgQuery === 'es') && lgQuery !== currentLang) {
+      console.log(`Language change detected from modal: ${currentLang} -> ${lgQuery}`);
+      handleLanguageChange(lgQuery);
+    }
+  }, [lgQuery, currentLang]);
+
 
   // Handle translate button click
   const handleTranslateClick = useCallback(() => {
-    setIsTranslating(true);
+    console.log('Translate button clicked');
+    
+    // Set current language in lgQuery immediately when button is clicked
+    if (setLgQuery) {
+      setLgQuery(currentLang);
+    }
     
     // Always show the language modal for all variants
     setShowLanguageModal(true);
-    setIsTranslating(false);
-  }, [setShowLanguageModal]);
+  }, [setShowLanguageModal, setLgQuery, currentLang]);
 
   // Get button styles based on variant
   const getButtonStyles = () => {
@@ -171,7 +207,7 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
 
   return (
     <div className={`cursor-pointer ${parentClass}`}>
-      {/* Hidden Google Translate element */}
+      {/* Hidden Google Translate element (tutorial style) */}
       <div 
         id="google_translate_element" 
         style={{
