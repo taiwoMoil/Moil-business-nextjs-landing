@@ -2,7 +2,7 @@ import MobilePricingItem from "../components/mobile_pricing_item";
 import PricingHeaderForPringItem from "../components/pricing_header";
 import {nanoid} from "nanoid";
 
-export default function DetailedPricinSection({ refQuery, allShow }: any) {
+export default function DetailedPricinSection({ refQuery, lgQuery, allShow }: any) {
 
   const pricingHeaders = [
     {
@@ -155,7 +155,7 @@ const mobilePricingDetails = [
             pricingHeaders.map((head, index) => {
               return (
                 <th className={` ${head.plan === "STANDARD" ? "w-[115%] bg-[#EEECF8]" : "w-full"} border border-[#E6E9F5]`}>
-                  <PricingHeaderForPringItem refQuery={refQuery} flowId={head.flowId} allShow={allShow} plan={head.plan} percentage_off={head.percentage_off} price={head.price} cta={head.cta} key={index} />
+                  <PricingHeaderForPringItem refQuery={refQuery} lgQuery={lgQuery} flowId={head.flowId} allShow={allShow} plan={head.plan} percentage_off={head.percentage_off} price={head.price} cta={head.cta} key={index} />
                 </th>
               )
             })
@@ -195,7 +195,7 @@ const mobilePricingDetails = [
         {
           mobilePricingDetails.map((head, index) => {
             return (
-              <MobilePricingItem flowId={head.pricing_header.flowId} values={head.values} allShow={allShow} plan={head.pricing_header.plan} percentage_off={head.pricing_header.percentage_off} price={head.pricing_header.price} cta={head.pricing_header.cta} key={index} />
+              <MobilePricingItem flowId={head.pricing_header.flowId} values={head.values} allShow={allShow} plan={head.pricing_header.plan} percentage_off={head.pricing_header.percentage_off} price={head.pricing_header.price} cta={head.pricing_header.cta} refQuery={refQuery} lgQuery={lgQuery} key={index} />
             )
           })
         }

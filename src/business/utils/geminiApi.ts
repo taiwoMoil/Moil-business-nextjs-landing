@@ -47,20 +47,33 @@ export interface AudienceAnalysisRequest {
 export async function generateBusinessModel(data: BusinessModelRequest) {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
-    
+
     const prompt = `
-    Generate a concise Business Model Canvas for "${data.businessName}" offering ${data.services} services in ${data.city}, targeting ${data.targetMarket}.
-    
-    Return ONLY beautifully formatted HTML (maximum 600 characters) covering:
-    
-    <div class="space-y-4">
-      <div><h3 class="font-bold text-gray-800 mb-2">Value Proposition</h3><p class="text-sm text-gray-700">Core benefits and unique selling points</p></div>
-      <div><h3 class="font-bold text-gray-800 mb-2">Revenue Model</h3><p class="text-sm text-gray-700">Key revenue streams and pricing</p></div>
-      <div><h3 class="font-bold text-gray-800 mb-2">Key Activities</h3><p class="text-sm text-gray-700">Core operations and critical tasks</p></div>
-      <div><h3 class="font-bold text-gray-800 mb-2">Partnerships</h3><p class="text-sm text-gray-700">Strategic partners in ${data.city}</p></div>
-    </div>
-    
-    Return ONLY the HTML with Tailwind CSS classes. Keep it concise and actionable.
+  Generate a concise and persuasive Business Model Canvas for "${data.businessName}", offering ${data.services} in ${data.city}, targeting ${data.targetMarket}.
+ 
+The output must:
+- Be concise (under 600 characters)
+- Focus on business growth, innovation, and clear ROI
+- Highlight the value of complete market research as a differentiator
+- Sound credible and conversion-oriented, not generic
+ 
+Return ONLY beautifully formatted HTML (Tailwind CSS) structured like this:
+ 
+<div class="space-y-4">
+<div><h3 class="font-bold text-gray-800 mb-2">Value Proposition</h3>
+<p class="text-sm text-gray-700">Show how complete market research and AI insights help clients reduce risk, identify growth opportunities, and outperform competitors.</p></div>
+ 
+  <div><h3 class="font-bold text-gray-800 mb-2">Revenue Model</h3>
+<p class="text-sm text-gray-700">Mention flexible pricing (subscription or project-based) and how insights lead to measurable revenue increases.</p></div>
+ 
+  <div><h3 class="font-bold text-gray-800 mb-2">Key Activities</h3>
+<p class="text-sm text-gray-700">Focus on AI-driven research, data validation, and strategic planning for clients seeking fast, evidence-based growth.</p></div>
+ 
+  <div><h3 class="font-bold text-gray-800 mb-2">Partnerships</h3>
+<p class="text-sm text-gray-700">Highlight collaborations with local research firms, tech providers, and business consultants in ${data.city} to enhance client outcomes.</p></div>
+</div>
+ 
+Return ONLY the HTML (no explanations).
     `;
 
     const result = await model.generateContent(prompt);
@@ -86,7 +99,7 @@ export async function generateBusinessModel(data: BusinessModelRequest) {
 export async function generateMarketResearch(data: MarketResearchRequest) {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
-    
+
     const prompt = `
     Provide concise market research for a ${data.businessType} business in ${data.location} targeting ${data.targetAudience}.
     
@@ -124,7 +137,7 @@ export async function generateMarketResearch(data: MarketResearchRequest) {
 export async function generateCompetitorAnalysis(data: CompetitorAnalysisRequest) {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
-    
+
     const prompt = `
     Analyze competitors for "${data.businessName}" in ${data.industry} industry, ${data.location}.
     
@@ -162,7 +175,7 @@ export async function generateCompetitorAnalysis(data: CompetitorAnalysisRequest
 export async function generateBusinessPlan(data: BusinessPlanRequest) {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
-    
+
     const prompt = `
     Create a concise business plan for "${data.businessName}" in ${data.industry} with ${data.budget} budget over ${data.timeline}.
     
@@ -201,7 +214,7 @@ export async function generateBusinessPlan(data: BusinessPlanRequest) {
 export async function generateFinancialProjections(data: FinancialProjectionRequest) {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
-    
+
     const prompt = `
     Generate realistic financial projections for "${data.businessName}" in ${data.industry} industry, located in ${data.location}, with a ${data.budget} budget targeting ${data.targetRevenue} revenue.
     
@@ -220,7 +233,7 @@ export async function generateFinancialProjections(data: FinancialProjectionRequ
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    
+
     try {
       const jsonData = JSON.parse(response.text());
       return {
@@ -261,7 +274,7 @@ export async function generateFinancialProjections(data: FinancialProjectionRequ
 export async function generateAudienceAnalysis(data: AudienceAnalysisRequest) {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
-    
+
     const prompt = `
     Analyze target audience for ${data.businessType} business in ${data.location}, ${data.industry} industry.
     

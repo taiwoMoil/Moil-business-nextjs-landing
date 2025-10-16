@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { safeWindow } from "../../../utils/safe_window";
 import { businessBaseUrl } from "../../common/constants/baseUrl";
+import { buildBusinessRegisterUrl } from "../utils/urlBuilder";
 
-export default function MobilePricingItem({ flowId, plan, percentage_off, cta, price, allShow, values }: { flowId: any, plan: string, percentage_off: number, cta: string, price: { monthly: number, annually: number }, allShow: string, values: string[][] }) {
+export default function MobilePricingItem({ flowId, plan, percentage_off, cta, price, allShow, values, refQuery, lgQuery }: { flowId: any, plan: string, percentage_off: number, cta: string, price: { monthly: number, annually: number }, allShow: string, values: string[][], refQuery?: string, lgQuery?: string }) {
   const [oneShow, setOneShow] = useState(allShow);
 
   useEffect(() => {
@@ -12,7 +13,12 @@ export default function MobilePricingItem({ flowId, plan, percentage_off, cta, p
   }, [allShow]);
 
   const handleClick = () => {
-    safeWindow?.open(`${businessBaseUrl}/register?flowId=${flowId[oneShow]}`, '_blank');
+    const url = buildBusinessRegisterUrl({
+      ref: refQuery,
+      lg: lgQuery,
+      flowId: flowId[oneShow]
+    });
+    safeWindow?.open(url, '_blank');
   };
 
   return (

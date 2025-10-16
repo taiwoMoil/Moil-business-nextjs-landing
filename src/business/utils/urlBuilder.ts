@@ -7,6 +7,7 @@ import { businessBaseUrl } from "../../common/constants/baseUrl";
 interface UrlParams {
   ref?: string;
   lg?: string;
+  flowId?: string;
 }
 
 export const buildBusinessUrl = (params: UrlParams = {}): string => {
@@ -38,6 +39,10 @@ export const buildBusinessRegisterUrl = (params: UrlParams = {}): string => {
   
   if (params.lg) {
     urlParams.append('lg', params.lg);
+  }
+  
+  if (params.flowId) {
+    urlParams.append('flowId', params.flowId);
   }
   
   const queryString = urlParams.toString();

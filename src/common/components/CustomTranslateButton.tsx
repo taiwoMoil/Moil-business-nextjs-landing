@@ -4,6 +4,7 @@ import { getCookie, hasCookie, setCookie } from 'cookies-next';
 
 interface CustomTranslateButtonProps {
   setShowLanguageModal: (show: boolean) => void;
+  setLgQuery?: (lang: string) => void;
   parentClass?: string;
   className?: string;
   textClassName?: string;
@@ -15,6 +16,7 @@ interface CustomTranslateButtonProps {
 
 const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
   setShowLanguageModal,
+  setLgQuery,
   parentClass = '',
   className = '',
   textClassName = '',
@@ -36,7 +38,16 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
     // Check current language from cookie
     if (hasCookie('googtrans')) {
       const cookieValue = getCookie('googtrans') as string;
-      setCurrentLang(cookieValue === '/auto/es' ? 'es' : 'en');
+      const detectedLang = cookieValue === '/auto/es' ? 'es' : 'en';
+      setCurrentLang(detectedLang);
+      
+      // Set initial lgQuery if callback is provided
+      if (setLgQuery) {
+        setLgQuery(detectedLang);
+      }
+    } else if (setLgQuery) {
+      // Set default language if no cookie exists
+      setLgQuery('en');
     }
 
     return () => {
@@ -45,11 +56,11 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
       }
       delete window.googleTranslateElementInit;
     };
-  }, []);
+  }, [setLgQuery]);
 
   const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement({
-      pageLanguage: 'auto',
+      pageLanguage: 'en',
       autoDisplay: false,
       includedLanguages: "es,en",
       layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
@@ -62,23 +73,47 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
     
     setCookie('googtrans', cookieValue);
     setCurrentLang(newLang);
-    window.location.reload();
-  }, [currentLang]);
+    
+    // Update lgQuery if callback is provided
+    if (setLgQuery) {
+      setLgQuery(newLang);
+    }
+    
+    // Trigger Google Translate without reload
+    const triggerGoogleTranslate = (language: string) => {
+      const checkForTranslateElement = () => {
+        const translateElement = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+        if (translateElement) {
+          translateElement.value = language;
+          const event = new Event('change', { bubbles: true });
+          translateElement.dispatchEvent(event);
+          return true;
+        }
+        return false;
+      };
+
+      if (!checkForTranslateElement()) {
+        setTimeout(() => {
+          if (!checkForTranslateElement()) {
+            setTimeout(() => {
+              checkForTranslateElement();
+            }, 500);
+          }
+        }, 100);
+      }
+    };
+    
+    triggerGoogleTranslate(newLang);
+  }, [currentLang, setLgQuery]);
 
   // Handle translate button click
   const handleTranslateClick = useCallback(() => {
     setIsTranslating(true);
     
-    // For home page variant, show the language modal
-    if (variant === 'home') {
-      setShowLanguageModal(true);
-      setIsTranslating(false);
-      return;
-    }
-
-    // For other variants, toggle language
-    toggleLanguage();
-  }, [variant, setShowLanguageModal, toggleLanguage]);
+    // Always show the language modal for all variants
+    setShowLanguageModal(true);
+    setIsTranslating(false);
+  }, [setShowLanguageModal]);
 
   // Get button styles based on variant
   const getButtonStyles = () => {
@@ -112,26 +147,26 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
     }
   };
 
-  // Get flag image source - show the flag of the TARGET language (what clicking will do)
+  // Get flag image source - show the flag of the CURRENT language
   const getFlagSrc = () => {
     return currentLang === 'en'
-      ? 'https://res.cloudinary.com/drlcisipo/image/upload/v1713288601/Website%20images/Spanish_2_oaawih.svg' // Spanish flag when in English (can switch to Spanish)
-      : 'https://res.cloudinary.com/drlcisipo/image/upload/v1714663084/English_1_z3fa77.png'; // English flag when in Spanish (can switch to English)
+      ? 'https://res.cloudinary.com/drlcisipo/image/upload/v1714663084/English_1_z3fa77.png' // English flag when in English
+      : 'https://res.cloudinary.com/drlcisipo/image/upload/v1713288601/Website%20images/Spanish_2_oaawih.svg'; // Spanish flag when in Spanish
   };
 
-  // Get display text - show the TARGET language (what clicking will do)
+  // Get display text - show the CURRENT language
   const getDisplayText = () => {
     if (variant === 'home') {
-      return currentLang === 'en' ? 'Español' : 'English';
+      return currentLang === 'en' ? 'English' : 'Español';
     }
-    return currentLang === 'en' ? 'ESP' : 'ENG';
+    return currentLang === 'en' ? 'ENG' : 'ESP';
   };
 
-  // Get mobile text - show what action will happen when clicked
+  // Get mobile text - show current language
   const getMobileText = () => {
     return currentLang === 'en' 
-      ? 'Cambiar a Español' 
-      : 'Switch to English';
+      ? 'English' 
+      : 'Español';
   };
 
   return (
@@ -152,7 +187,7 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
         className={getButtonStyles()}
         onClick={handleTranslateClick}
         disabled={isTranslating}
-        aria-label={currentLang === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+        aria-label="Select Language"
       >
         {/* Loading state */}
         {isTranslating && (
@@ -163,7 +198,7 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
         {showIcon && !isTranslating && (
           <img
             src={getFlagSrc()}
-            alt={currentLang === 'en' ? 'Spanish Flag' : 'English Flag'}
+            alt={currentLang === 'en' ? 'English Flag' : 'Spanish Flag'}
             className="w-5 h-5 md:w-6 md:h-6 object-contain"
             width={24}
             height={24}

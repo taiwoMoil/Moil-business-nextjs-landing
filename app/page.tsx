@@ -27,6 +27,12 @@ export default function BusinessPage() {
     const url = new URL(window.location.href);
     const searchParams = new URLSearchParams(url.search);
     setRefQuery(searchParams.get('ref'));
+    
+    // Get lg parameter from URL
+    const lgParam = searchParams.get('lg');
+    if (lgParam) {
+      setQueryLg(lgParam);
+    }
 
     // Check if user has selected a language before
     const tlang = localStorage.getItem("tlang");
@@ -67,19 +73,19 @@ export default function BusinessPage() {
           setQueryLg={setQueryLg}
           setShowLanguageModal={setShowLanguageModal}
         />
-        <EnhancedHero onGetStarted={handleGetStarted} />
+        <EnhancedHero onGetStarted={handleGetStarted} refQuery={refQuery || undefined} lgQuery={queryLg} />
         <div id="services">
-          <ServicesShowcase />
+          <ServicesShowcase refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
         <div id="features">
           <MarketResearch />
         </div>
-        <SmartHiring />
+        <SmartHiring refQuery={refQuery || undefined} lgQuery={queryLg} />
         <div id="testimonials">
           <TestimonialsSection />
         </div>
         <FAQSection />
-        <FinalCTA />
+        <FinalCTA refQuery={refQuery || undefined} lgQuery={queryLg} />
         <FooterSection refQuery={refQuery} lgQuery={queryLg} />
         {showModal}
       </div>

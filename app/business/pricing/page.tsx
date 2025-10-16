@@ -4,7 +4,10 @@ import DetailedPricinSection from "../../../src/business/sections/detailed_prici
 import BusinessNavigation from "../../../src/business/components/navigation";
 import FAQSection from "../../../src/business/sections/FAQ_section";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
 import FooterSection from "../../../src/common/sections/footer";
+import SelectLanguage from "../../../src/common/components/selectLanguage";
 
 export default function BusinessPricingPage() {
 
@@ -12,6 +15,30 @@ export default function BusinessPricingPage() {
   const [refQuery, setRefQuery] = useState<string | null>(null);
   const [queryLg, setQueryLg] = useState("");
   const [showLanguageModal, setShowLanguageModal] = useState(false);
+
+  useEffect(() => {
+    // Get URL parameters on client side
+    const url = new URL(window.location.href);
+    const searchParams = new URLSearchParams(url.search);
+    setRefQuery(searchParams.get('ref'));
+    
+    // Get lg parameter from URL
+    const lgParam = searchParams.get('lg');
+    if (lgParam) {
+      setQueryLg(lgParam);
+    }
+  }, []);
+
+  const showModal = showLanguageModal ? createPortal(
+    <motion.div
+      initial={{ x: "100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="top-0 left-0 fixed bottom-0 right-0 z-50 h-screen flex justify-center items-center md:bg-black md:bg-opacity-70 backdrop-blur-[2px] sm:bg-white vsm:bg-white overflow-y-scroll ScrollOnly"
+    >
+      <SelectLanguage handleClick={() => setShowLanguageModal(false)} setQueryLg={setQueryLg} />
+    </motion.div>, document.getElementById("modal")!
+  ) : null;
 
 	return (
 		<>
@@ -33,11 +60,15 @@ export default function BusinessPricingPage() {
 				</div>
 
 				<div className="px-6 sm:px-8 md:px-0 flex justify-center">
-					<DetailedPricinSection refQuery={refQuery} allShow={allShow} />
+					<DetailedPricinSection refQuery={refQuery} lgQuery={queryLg} allShow={allShow} />
 				</div>
 				<FAQSection />
 			</div>
-			<FooterSection refQuery={refQuery} />
+			<FooterSection refQuery={refQuery} lgQuery={queryLg} />
+			{showModal}
+
+			{/* Modal Container */}
+			<div id="modal"></div>
 		</>
 	)
 }

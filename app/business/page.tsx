@@ -26,6 +26,12 @@ export default function BusinessPage() {
     const url = new URL(window.location.href);
     const searchParams = new URLSearchParams(url.search);
     setRefQuery(searchParams.get('ref'));
+    
+    // Get lg parameter from URL
+    const lgParam = searchParams.get('lg');
+    if (lgParam) {
+      setQueryLg(lgParam);
+    }
 
     const tlang = localStorage.getItem("tlang");
     if (tlang == null) {

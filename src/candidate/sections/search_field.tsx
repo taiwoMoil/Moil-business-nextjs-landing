@@ -7,6 +7,7 @@ import SearchBarsOnTop from "../components/search";
 import HorizontalNFilterIcon from "../components/horizontal_btn";
 import DashboardQueryItem from "../components/dashboard_query_item";
 import { baseURL, workerBaseUrl } from "../../common/constants/baseUrl";
+import { buildCandidateJobUrl } from "../utils/urlBuilder";
 import PaginationBtn from "../components/paginate_btn";
 
 
@@ -36,6 +37,7 @@ function SearchJobField({ accType = "client" }: SearchJobFieldProps) {
   const location = searchParams?.get("location") || "";
   const getPage = searchParams?.get("page") || "1";
   const pageLang = searchParams?.get("lg") || "en";
+  const refQuery = searchParams?.get("ref") || "";
 
   const [ourSearchLoading, setOurSearchLoading] = useState(false);
   const [jobListData, setJobListData] = useState<JobPost[]>([]);
@@ -374,7 +376,10 @@ function SearchJobField({ accType = "client" }: SearchJobFieldProps) {
                 recruitmentDuration={item.applicationDeadline}
                 JobLocation={`${item.location.city}, ${item.location.state}`}
                 indeed={item.indeed}
-                jobUrl={`${workerBaseUrl}/jobs/${item.custom_name}?lg=${pageLang}`}
+                jobUrl={buildCandidateJobUrl(item.custom_name, { 
+                  lg: pageLang,
+                  ...(refQuery && { ref: refQuery })
+                })}
               />
             ))}
           </div>

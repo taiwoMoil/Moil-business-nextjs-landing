@@ -11,17 +11,29 @@ interface SelectLanguageProps {
 const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
   const [defaultLang, setDefaultLang] = useState("");
 
-  // Function to simulate an HTML change event on the google translate element.
-  const triggerHtmlEvent = (element: any, eventName: string) => {
-    let event: any;
-    if (document.createEvent) {
-      event = document.createEvent("HTMLEvents");
-      event.initEvent(eventName, true, true);
-      element.dispatchEvent(event);
-    } else {
-      event = (document as any).createEventObject();
-      event.eventType = eventName;
-      element.fireEvent("on" + event.eventType, event);
+  // Function to trigger Google Translate language change
+  const triggerGoogleTranslate = (language: string) => {
+    // Wait for Google Translate to be available
+    const checkForTranslateElement = () => {
+      const translateElement = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+      if (translateElement) {
+        translateElement.value = language;
+        const event = new Event('change', { bubbles: true });
+        translateElement.dispatchEvent(event);
+        return true;
+      }
+      return false;
+    };
+
+    // Try immediately, then retry with delays if needed
+    if (!checkForTranslateElement()) {
+      setTimeout(() => {
+        if (!checkForTranslateElement()) {
+          setTimeout(() => {
+            checkForTranslateElement();
+          }, 500);
+        }
+      }, 100);
     }
   };
 
@@ -45,14 +57,12 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
 
     window.history.replaceState({}, "", url);
 
+    // Trigger Google Translate without reload
+    triggerGoogleTranslate('en');
+
     if (handleClick) {
       handleClick();
     }
-    
-    // Reload to apply language setting
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
   };
 
   // When the Spanish button is clicked, translate page to Spanish.
@@ -75,14 +85,12 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
 
     window.history.replaceState({}, "", url);
 
+    // Trigger Google Translate without reload
+    triggerGoogleTranslate('es');
+
     if (handleClick) {
       handleClick();
     }
-    
-    // Reload to apply translation
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
   };
 
   return (

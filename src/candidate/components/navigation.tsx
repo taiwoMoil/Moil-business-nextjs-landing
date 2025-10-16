@@ -86,6 +86,7 @@ export default function CandidateNavigation({
             <CustomTranslateButton 
               variant="candidate"
               setShowLanguageModal={setShowLanguageModal}
+              setLgQuery={setQueryLg}
             />
             <Link 
               href="/business" 
@@ -172,6 +173,7 @@ export default function CandidateNavigation({
                 <CustomTranslateButton 
                   variant="candidate"
                   setShowLanguageModal={setShowLanguageModal}
+                  setLgQuery={setQueryLg}
                   className="flex items-center space-x-3 w-full px-4 py-3 text-sm text-gray-600 hover:bg-gray-100/50 rounded-lg transition-all"
                 />
                 <Link 

@@ -2,16 +2,17 @@
 
 import { businessBaseUrl } from "../../common/constants/baseUrl";
 import { safeWindow } from "../../../utils/safe_window";
+import { buildBusinessRegisterUrl } from "../utils/urlBuilder";
 
-export default function PricingHeaderForPringItem({ flowId, plan, percentage_off, cta, price, allShow, refQuery }: { flowId: any, plan: string, percentage_off: number, cta: string, price: { monthly: number, annually: number }, allShow: string, refQuery: string }) {
+export default function PricingHeaderForPringItem({ flowId, plan, percentage_off, cta, price, allShow, refQuery, lgQuery }: { flowId: any, plan: string, percentage_off: number, cta: string, price: { monthly: number, annually: number }, allShow: string, refQuery: string, lgQuery?: string }) {
 
 	const handleClick = () => {
-		const url = new URL(`${businessBaseUrl}/register`);
-		url.searchParams.append('flowId', flowId[allShow]);
-		if (refQuery && refQuery !== "null") {
-			url.searchParams.append('ref', refQuery);
-		}
-		safeWindow?.open(url.toString(), '_blank');
+		const url = buildBusinessRegisterUrl({
+			ref: refQuery,
+			lg: lgQuery,
+			flowId: flowId[allShow]
+		});
+		safeWindow?.open(url, '_blank');
 	};
 
 	return (
