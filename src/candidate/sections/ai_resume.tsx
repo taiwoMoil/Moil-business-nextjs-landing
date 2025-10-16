@@ -136,20 +136,24 @@ export default function AIResumeSection({ refQuery, lgQuery }: AIResumeSectionPr
             </div>
 
             {/* Resume Preview Mockup */}
-            <div className="bg-gray-50 rounded-2xl p-6 space-y-4">
-              <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-              <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-              <div className="space-y-2">
-                <div className="h-2 bg-gray-200 rounded"></div>
-                <div className="h-2 bg-gray-200 rounded w-5/6"></div>
-                <div className="h-2 bg-gray-200 rounded w-4/6"></div>
+            <div className="bg-white rounded-2xl p-6 space-y-3 shadow-sm border">
+              <div className="text-center border-b pb-3">
+                <h3 className="text-lg font-bold text-gray-800">Sarah Johnson</h3>
+                <p className="text-sm text-gray-600">Software Developer</p>
+                <p className="text-xs text-gray-500">sarah.johnson@email.com | (555) 123-4567</p>
               </div>
-              <div className="pt-4">
-                <div className="h-3 bg-[#5843BE]/30 rounded w-2/3 mb-2"></div>
-                <div className="space-y-1">
-                  <div className="h-2 bg-gray-200 rounded w-full"></div>
-                  <div className="h-2 bg-gray-200 rounded w-4/5"></div>
+              
+              <div>
+                <h4 className="text-sm font-semibold text-[#5843BE] mb-1">Experience</h4>
+                <div className="text-xs text-gray-700">
+                  <p className="font-medium">Frontend Developer - Tech Corp</p>
+                  <p className="text-gray-600">2022 - Present</p>
                 </div>
+              </div>
+              
+              <div>
+                <h4 className="text-sm font-semibold text-[#5843BE] mb-1">Skills</h4>
+                <p className="text-xs text-gray-700">React, JavaScript, TypeScript, CSS</p>
               </div>
             </div>
 
