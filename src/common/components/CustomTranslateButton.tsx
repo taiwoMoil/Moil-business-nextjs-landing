@@ -4,6 +4,8 @@ import { getCookie, hasCookie, setCookie } from 'cookies-next';
 
 interface CustomTranslateButtonProps {
   setShowLanguageModal: (show: boolean) => void;
+  setLgQuery: (lg: string) => void;
+  lgQuery: string;
   parentClass?: string;
   className?: string;
   textClassName?: string;
@@ -15,6 +17,8 @@ interface CustomTranslateButtonProps {
 
 const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
   setShowLanguageModal,
+  setLgQuery,
+  lgQuery,
   parentClass = '',
   className = '',
   textClassName = '',
@@ -63,13 +67,16 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
     setCookie('googtrans', cookieValue);
     setCurrentLang(newLang);
     
+    // Update query parameter using the provided setter
+    setLgQuery(newLang);
+    
     // Update URL parameter
     const url = new URL(window.location.href);
     url.searchParams.set('lg', newLang);
     window.history.replaceState({}, '', url);
     
     window.location.reload();
-  }, [currentLang]);
+  }, [currentLang, setLgQuery]);
 
   // Handle translate button click
   const handleTranslateClick = useCallback(() => {
