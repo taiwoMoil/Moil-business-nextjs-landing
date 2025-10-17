@@ -144,7 +144,7 @@ export default function EnhancedHero({ onGetStarted, refQuery, lgQuery }: Enhanc
 
         {/* Key Features Stats - moved below everything */}
         <div className="mt-4 lg:mt-4 pt-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto text-xs md:text-sm">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto text-xs md:text-sm">
             <div className="flex items-center gap-3 text-white/80 justify-center">
               <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -161,7 +161,7 @@ export default function EnhancedHero({ onGetStarted, refQuery, lgQuery }: Enhanc
               </div>
               <span className="font-medium">Smart Hiring Tools</span>
             </div>
-            <div className="flex items-center gap-2 md:gap-3 text-white/80 justify-center">
+            <div className="flex items-center self-center gap-2 md:gap-3 text-white/80 justify-center">
               <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
                 <svg className="w-3 h-3 md:w-4 md:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
