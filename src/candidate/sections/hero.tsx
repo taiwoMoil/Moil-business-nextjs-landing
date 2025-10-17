@@ -122,34 +122,77 @@ export default function CandidateHero({ onGetStarted, refQuery, lgQuery }: Candi
           </button>
         </div>
 
-        {/* AI Features - Compact Design */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4 max-w-3xl mx-auto">
-          <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
-            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
-              <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 10.5V19L13.5 17.5V10.5M10.5 10.5V17.5L9 19V10.5M9 9V7.5L3 7V9H9Z" fill="currentColor"/>
-              </svg>
+        {/* AI Features - Mobile: Vertical Grid, Desktop: Horizontal */}
+        <div className="w-full max-w-3xl mx-auto">
+          {/* Mobile Layout: 2-column grid */}
+          <div className="grid grid-cols-1 gap-3 sm:hidden">
+            <div className="group flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center flex-shrink-0">
+                <svg width="14" height="14" className="text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 10.5V19L13.5 17.5V10.5M10.5 10.5V17.5L9 19V10.5M9 9V7.5L3 7V9H9Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div className="flex-1">
+                <span className="text-white text-sm font-medium block">Voice Interview Coach</span>
+                <span className="text-white/70 text-xs">Practice with AI feedback</span>
+              </div>
             </div>
-            <span className="text-white text-xs md:text-sm font-medium">Voice Interview Coach</span>
+            
+            <div className="group flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center flex-shrink-0">
+                <svg width="14" height="14" className="text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9,2A7,7 0 0,1 16,9C16,10.57 15.5,12 14.61,13.19L15.41,14H16L22,20L20,22L14,16V15.41L13.19,14.61C12,15.5 10.57,16 9,16A7,7 0 0,1 2,9A7,7 0 0,1 9,2M9,4A5,5 0 0,0 4,9A5,5 0 0,0 9,14A5,5 0 0,0 14,9A5,5 0 0,0 9,4Z" fill="currentColor"/>
+                  <circle cx="9" cy="9" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <div className="flex-1">
+                <span className="text-white text-sm font-medium block">Smart Job Matching</span>
+                <span className="text-white/70 text-xs">AI-powered recommendations</span>
+              </div>
+            </div>
+            
+            <div className="group flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center flex-shrink-0">
+                <svg width="14" height="14" className="text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div className="flex-1">
+                <span className="text-white text-sm font-medium block">Voice & Bilingual</span>
+                <span className="text-white/70 text-xs">Multilingual support</span>
+              </div>
+            </div>
           </div>
-          
-          <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
-            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
-              <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9,2A7,7 0 0,1 16,9C16,10.57 15.5,12 14.61,13.19L15.41,14H16L22,20L20,22L14,16V15.41L13.19,14.61C12,15.5 10.57,16 9,16A7,7 0 0,1 2,9A7,7 0 0,1 9,2M9,4A5,5 0 0,0 4,9A5,5 0 0,0 9,14A5,5 0 0,0 14,9A5,5 0 0,0 9,4Z" fill="currentColor"/>
-                <circle cx="9" cy="9" r="2" fill="currentColor"/>
-              </svg>
+
+          {/* Desktop Layout: Horizontal badges */}
+          <div className="hidden sm:flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4">
+            <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
+                <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 10.5V19L13.5 17.5V10.5M10.5 10.5V17.5L9 19V10.5M9 9V7.5L3 7V9H9Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span className="text-white text-xs md:text-sm font-medium">Voice Interview Coach</span>
             </div>
-            <span className="text-white text-xs md:text-sm font-medium">Smart Job Matching</span>
-          </div>
-          
-          <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
-            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
-              <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z" fill="currentColor"/>
-              </svg>
+            
+            <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
+                <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9,2A7,7 0 0,1 16,9C16,10.57 15.5,12 14.61,13.19L15.41,14H16L22,20L20,22L14,16V15.41L13.19,14.61C12,15.5 10.57,16 9,16A7,7 0 0,1 2,9A7,7 0 0,1 9,2M9,4A5,5 0 0,0 4,9A5,5 0 0,0 9,14A5,5 0 0,0 14,9A5,5 0 0,0 9,4Z" fill="currentColor"/>
+                  <circle cx="9" cy="9" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <span className="text-white text-xs md:text-sm font-medium">Smart Job Matching</span>
             </div>
-            <span className="text-white text-xs md:text-sm font-medium">Voice & Bilingual</span>
+            
+            <div className="group flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 md:px-4 md:py-2 border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-[#FF6633] to-[#ea580c] rounded-full flex items-center justify-center">
+                <svg width="12" height="12" className="md:w-4 md:h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span className="text-white text-xs md:text-sm font-medium">Voice & Bilingual</span>
+            </div>
           </div>
         </div>
       </div>
