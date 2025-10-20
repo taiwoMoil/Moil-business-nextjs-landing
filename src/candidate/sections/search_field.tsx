@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import Autocomplete from "react-google-autocomplete";
 import SearchBarsOnTop from "../components/search";
 import HorizontalNFilterIcon from "../components/horizontal_btn";
 import DashboardQueryItem from "../components/dashboard_query_item";
@@ -250,12 +251,19 @@ function SearchJobField({ accType = "client" }: SearchJobFieldProps) {
                   <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
                 </svg>
               </div>
-              <input
-                type="text"
+              <Autocomplete
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY_1}
                 placeholder="City, state, or remote"
                 value={searchLocation}
-                onChange={(e) => setSearchLocation(e.target.value)}
+                onPlaceSelected={(place) => {
+                  setSearchLocation(place.formatted_address || "");
+                }}
+                onChange={(e) => setSearchLocation((e.target as HTMLInputElement).value)}
                 className="w-full pl-12 pr-12 py-4 bg-white rounded-2xl border border-gray-200 focus:border-[#FF6633] focus:ring-2 focus:ring-[#FF6633]/20 outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
+                options={{
+                  types: ["(regions)"],
+                  componentRestrictions: { country: "us" },
+                }}
               />
               {searchLocation && (
                 <button
