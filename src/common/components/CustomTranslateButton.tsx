@@ -82,16 +82,10 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
   const handleTranslateClick = useCallback(() => {
     setIsTranslating(true);
     
-    // For home page variant, show the language modal
-    if (variant === 'home') {
-      setShowLanguageModal(true);
-      setIsTranslating(false);
-      return;
-    }
-
-    // For other variants, toggle language
-    toggleLanguage();
-  }, [variant, setShowLanguageModal, toggleLanguage]);
+    // Always show the language modal for user selection
+    setShowLanguageModal(true);
+    setIsTranslating(false);
+  }, [setShowLanguageModal]);
 
   // Get button styles based on variant
   const getButtonStyles = () => {
@@ -125,26 +119,26 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
     }
   };
 
-  // Get flag image source - show the flag of the TARGET language (what clicking will do)
+  // Get flag image source - show the flag of the CURRENT language
   const getFlagSrc = () => {
     return currentLang === 'en'
-      ? 'https://res.cloudinary.com/drlcisipo/image/upload/v1713288601/Website%20images/Spanish_2_oaawih.svg' // Spanish flag when in English (can switch to Spanish)
-      : 'https://res.cloudinary.com/drlcisipo/image/upload/v1714663084/English_1_z3fa77.png'; // English flag when in Spanish (can switch to English)
+      ? 'https://res.cloudinary.com/drlcisipo/image/upload/v1714663084/English_1_z3fa77.png' // English flag when in English
+      : 'https://res.cloudinary.com/drlcisipo/image/upload/v1713288601/Website%20images/Spanish_2_oaawih.svg'; // Spanish flag when in Spanish
   };
 
-  // Get display text - show the TARGET language (what clicking will do)
+  // Get display text - show current language since clicking opens language selection
   const getDisplayText = () => {
     if (variant === 'home') {
-      return currentLang === 'en' ? 'Español' : 'English';
+      return currentLang === 'en' ? 'English' : 'Español';
     }
-    return currentLang === 'en' ? 'ESP' : 'ENG';
+    return currentLang === 'en' ? 'ENG' : 'ESP';
   };
 
-  // Get mobile text - show what action will happen when clicked
+  // Get mobile text - show that clicking opens language selection
   const getMobileText = () => {
     return currentLang === 'en' 
-      ? 'Cambiar a Español' 
-      : 'Switch to English';
+      ? 'Select Language' 
+      : 'Seleccionar Idioma';
   };
 
   return (
@@ -165,7 +159,7 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
         className={getButtonStyles()}
         onClick={handleTranslateClick}
         disabled={isTranslating}
-        aria-label={currentLang === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+        aria-label={currentLang === 'en' ? 'Select Language' : 'Seleccionar Idioma'}
       >
         {/* Loading state */}
         {isTranslating && (

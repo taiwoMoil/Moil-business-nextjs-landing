@@ -41,6 +41,11 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     if (handleClick) {
       handleClick();
     }
+
+    // Reload page to apply translation
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   };
 
   // When the Spanish button is clicked, translate page to Spanish.
@@ -72,6 +77,11 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     if (handleClick) {
       handleClick();
     }
+
+    // Reload page to apply translation
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   };
 
   return (

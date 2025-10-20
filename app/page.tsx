@@ -3,21 +3,21 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import { hasCookie } from 'cookies-next';
-import FAQSection from "~~/src/business/sections/FAQ_section";
-import SelectLanguage from "@/src/common/components/selectLanguage";
-import FooterSection from "@/src/common/sections/footer";
+import SelectLanguage from "../src/common/components/selectLanguage";
+import FooterSection from "../src/common/sections/footer";
 
-// New Enhanced Business Components
-import BusinessNavigation from "@/src/business/components/navigation";
-import EnhancedHero from "@/src/business/sections/enhanced_hero";
-import ServicesShowcase from "@/src/business/sections/services_showcase";
-import MarketResearch from "@/src/business/sections/market_research";
-import SmartHiring from "@/src/business/sections/smart_hiring";
-import FinalCTA from "@/src/business/sections/final_cta";
-import TestimonialsSection from "@/src/business/sections/testimonial_section";
+// Candidate Components
+import CandidateNavigation from "../src/candidate/components/navigation";
+import CandidateHero from "../src/candidate/sections/hero";
+import AIResumeSection from "../src/candidate/sections/ai_resume";
+import VoiceAssistantSection from "../src/candidate/sections/voice_assistant";
+import BilingualSection from "../src/candidate/sections/bilingual";
+import StatsSection from "../src/candidate/sections/stats";
+import TestimonialsSection from "../src/candidate/sections/testimonial_section";
+import FAQSection from "../src/candidate/sections/FAQ_section";
+import NewsletterSection from "../src/candidate/sections/newsletter";
 
-export default function BusinessPage() {
+export default function CandidatePage() {
   const [refQuery, setRefQuery] = useState<string | null>(null);
   const [queryLg, setQueryLg] = useState("");
   const [showLanguageModal, setShowLanguageModal] = useState(false);
@@ -34,21 +34,17 @@ export default function BusinessPage() {
       setQueryLg(lgParam);
     }
 
-    // Check if user has selected a language before
     const tlang = localStorage.getItem("tlang");
-    const hasGoogleTransCookie = hasCookie('googtrans');
-    
-    // Show language modal if no language preference is set
-    if (!tlang && !hasGoogleTransCookie) {
+    if (tlang == null) {
       setTimeout(() => {
         setShowLanguageModal(true);
-      }, 1000); // Increased delay to ensure proper loading
+      }, 50);
     }
   }, []);
 
   const handleGetStarted = () => {
-    // Scroll to pricing section or handle signup
-    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    // Scroll to job search section or handle signup
+    document.getElementById('job-search')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const showModal = showLanguageModal ? createPortal(
@@ -65,27 +61,34 @@ export default function BusinessPage() {
   return (
     <>
       <div className="bg-white">
-        {/* Enhanced Business Landing Page */}
-        <BusinessNavigation
+        {/* Enhanced Candidate Landing Page */}
+        <CandidateNavigation
           page="home"
           refQuery={refQuery}
           lgQuery={queryLg}
           setQueryLg={setQueryLg}
           setShowLanguageModal={setShowLanguageModal}
         />
-        <EnhancedHero onGetStarted={handleGetStarted} refQuery={refQuery || undefined} lgQuery={queryLg} />
-        <div id="services">
-          <ServicesShowcase refQuery={refQuery || undefined} lgQuery={queryLg} />
+        <CandidateHero onGetStarted={handleGetStarted} refQuery={refQuery || undefined} lgQuery={queryLg} />
+        <div id="ai-resume">
+          <AIResumeSection refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
-        <div id="features">
-          <MarketResearch />
+        <div id="voice-assistant">
+          <VoiceAssistantSection refQuery={refQuery || undefined} lgQuery={queryLg} />
         </div>
-        <SmartHiring refQuery={refQuery || undefined} lgQuery={queryLg} />
+        <div id="bilingual">
+          <BilingualSection refQuery={refQuery || undefined} lgQuery={queryLg} />
+        </div>
+        <div id="stats">
+          <StatsSection refQuery={refQuery || undefined} lgQuery={queryLg} />
+        </div>
         <div id="testimonials">
           <TestimonialsSection />
         </div>
-        <FAQSection />
-        <FinalCTA refQuery={refQuery || undefined} lgQuery={queryLg} />
+        <div id="faq">
+          <FAQSection />
+        </div>
+        <NewsletterSection />
         <FooterSection refQuery={refQuery} lgQuery={queryLg} />
         {showModal}
       </div>
