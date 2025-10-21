@@ -16,6 +16,7 @@ import StatsSection from "../src/candidate/sections/stats";
 import TestimonialsSection from "../src/candidate/sections/testimonial_section";
 import FAQSection from "../src/candidate/sections/FAQ_section";
 import NewsletterSection from "../src/candidate/sections/newsletter";
+import { baseURL1 } from "../src/common/constants/baseUrl";
 
 export default function CandidatePage() {
   const [refQuery, setRefQuery] = useState<string | null>(null);
@@ -34,13 +35,24 @@ export default function CandidatePage() {
       setQueryLg(lgParam);
     }
 
+    console.log(window.location.href)
+
     const tlang = localStorage.getItem("tlang");
-    if (tlang == null) {
+    console.log(tlang)
+    
+    // Show language modal on home page load if no language preference is stored
+    // or if this is the main landing page
+    const currentPath = window.location.pathname;
+    const isHomePage = currentPath === '/' || currentPath === '';
+    
+    if (tlang == null || isHomePage) {
       setTimeout(() => {
         setShowLanguageModal(true);
       }, 50);
     }
   }, []);
+
+  console.log(baseURL1)
 
   const handleGetStarted = () => {
     // Scroll to job search section or handle signup

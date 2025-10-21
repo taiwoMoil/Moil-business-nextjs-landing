@@ -189,7 +189,7 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
             {/* Mobile text */}
             {variant !== 'home' && (
               <span className={`${getTextStyles()} inline lg:hidden ml-2`}>
-                {getMobileText()}
+                {getDisplayText()}
               </span>
             )}
           </>
