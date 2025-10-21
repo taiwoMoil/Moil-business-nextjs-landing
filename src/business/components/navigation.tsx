@@ -141,22 +141,36 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="lg:hidden p-2 text-gray-600 hover:text-[#5843BE] transition-colors rounded-lg hover:bg-gray-100/50" 
-          onClick={handleToggle} 
-          aria-label="Toggle Navigation"
-        >
-          {!isOpen ? (
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          ) : (
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          )}
-        </button>
+        {/* Mobile Actions */}
+        <div className="lg:hidden flex items-center space-x-2">
+          {/* Mobile Translate Button */}
+          <CustomTranslateButton 
+            variant="business"
+            setShowLanguageModal={setShowLanguageModal}
+            setLgQuery={setQueryLg}
+            lgQuery={lgQuery}
+            iconOnly={false}
+            showText={true}
+            className="p-2 rounded-lg hover:bg-gray-100/50"
+          />
+          
+          {/* Mobile Menu Button */}
+          <button 
+            className="p-2 text-gray-600 hover:text-[#5843BE] transition-colors rounded-lg hover:bg-gray-100/50" 
+            onClick={handleToggle} 
+            aria-label="Toggle Navigation"
+          >
+            {!isOpen ? (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            ) : (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            )}
+          </button>
+        </div>
       </nav>
       {/* Mobile Menu */}
       {isOpen && (
@@ -208,6 +222,7 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
                 lgQuery={lgQuery}
                 showText={true}
                 showIcon={true}
+                showMobileText={true}
               />
               
               <Link 

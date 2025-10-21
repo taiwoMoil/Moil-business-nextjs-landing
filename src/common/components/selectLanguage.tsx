@@ -18,6 +18,7 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     console.log('SelectLanguage: English selected');
     setDefaultLang("English");
     localStorage.setItem("tlang", newLang);
+    sessionStorage.setItem('justSelectedLanguage', 'true');
     
     // Set Google Translate cookie (tutorial approach)
     setCookie('googtrans', '/auto/en', { path: '/', domain: window.location.hostname });
@@ -54,6 +55,7 @@ const SelectLanguage = ({ setQueryLg, handleClick }: SelectLanguageProps) => {
     console.log('SelectLanguage: Spanish selected');
     setDefaultLang("Spanish");
     localStorage.setItem("tlang", newLang);
+    sessionStorage.setItem('justSelectedLanguage', 'true');
     
     // Set Google Translate cookie (tutorial approach)
     setCookie('googtrans', '/auto/es', { path: '/', domain: window.location.hostname });
