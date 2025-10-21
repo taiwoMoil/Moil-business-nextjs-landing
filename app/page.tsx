@@ -40,15 +40,20 @@ export default function CandidatePage() {
     const tlang = localStorage.getItem("tlang");
     console.log(tlang)
     
-    // Show language modal on home page load if no language preference is stored
-    // or if this is the main landing page
+    // Show language modal on every homepage visit, but not immediately after language selection
     const currentPath = window.location.pathname;
     const isHomePage = currentPath === '/' || currentPath === '';
+    const justSelectedLanguage = sessionStorage.getItem('justSelectedLanguage');
     
-    if (tlang == null || isHomePage) {
+    if (isHomePage && !justSelectedLanguage) {
       setTimeout(() => {
         setShowLanguageModal(true);
       }, 50);
+    }
+    
+    // Clear the flag after checking
+    if (justSelectedLanguage) {
+      sessionStorage.removeItem('justSelectedLanguage');
     }
   }, []);
 

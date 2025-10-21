@@ -13,6 +13,7 @@ interface CustomTranslateButtonProps {
   showText?: boolean;
   showIcon?: boolean;
   iconOnly?: boolean;
+  showMobileText?: boolean;
 }
 
 const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
@@ -25,7 +26,8 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
   variant = 'business',
   showText = true,
   showIcon = true,
-  iconOnly = false
+  iconOnly = false,
+  showMobileText = false
 }) => {
   const [currentLang, setCurrentLang] = useState<'en' | 'es'>('en');
   const [isTranslating, setIsTranslating] = useState(false);
@@ -189,7 +191,7 @@ const CustomTranslateButton: React.FC<CustomTranslateButtonProps> = ({
             {/* Mobile text */}
             {variant !== 'home' && (
               <span className={`${getTextStyles()} inline lg:hidden ml-2`}>
-                {getDisplayText()}
+                {showMobileText ? getMobileText() : getDisplayText()}
               </span>
             )}
           </>

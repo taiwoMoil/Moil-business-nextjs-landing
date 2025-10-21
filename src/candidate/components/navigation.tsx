@@ -190,6 +190,7 @@ export default function CandidateNavigation({
                   setShowLanguageModal={setShowLanguageModal}
                   setLgQuery={setQueryLg}
                   lgQuery={lgQuery}
+                  showMobileText={true}
                   className="flex items-center space-x-3 w-full px-4 py-3 text-sm text-gray-600 hover:bg-gray-100/50 rounded-lg transition-all"
                 />
                 <Link 

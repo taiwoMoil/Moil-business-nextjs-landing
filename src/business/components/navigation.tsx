@@ -222,6 +222,7 @@ export default function BusinessNavigation({ page, refQuery, lgQuery, setQueryLg
                 lgQuery={lgQuery}
                 showText={true}
                 showIcon={true}
+                showMobileText={true}
               />
               
               <Link 
