@@ -25,7 +25,7 @@ export default function PricingHeaderForPringItem({ flowId, plan, percentage_off
 
 			<p className={`text-[20px] lg:text-[24px] ${plan === "STANDARD" && "mt-[30px]"} text-center leading-[1.2] font-medium`}>{plan}</p>
 			<div>
-				<p className="text-[#858BA0] text-center text-sm leading-normal"><span className="text-[#252430] text-[40px] font-[700]">{`$${allShow === "monthly" ? price.monthly : price.annually} `}</span>/Month</p>
+				<p className="text-[#858BA0] text-center text-sm leading-normal"><span className="text-[#252430] text-[40px] font-[700]">{`$${allShow === "monthly" ? price.monthly : price.annually} `}</span>/{allShow === "monthly" ? "Month" : "Year"}</p>
 				{allShow === "annually" && <p className="text-[#FF6633] text-sm leading-normal font-medium text-center">{percentage_off}% Off</p>}
 			</div>
 			<button onClick={handleClick} className={`py-4 rounded-[4px] whitespace-nowrap px-6 text-center w-full ${plan === "STANDARD" ? "bg-[#5843BD] text-[#E6E9F5]" : "text-[#5843BD] bg-[#EEECF8]"} text-sm md:text-xs lg:text-sm leading-normal`}>{cta}</button>
